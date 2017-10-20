@@ -23,20 +23,20 @@ Whole-step: Two half-steps.
 Intervals for each Major Key
 ----------------------------
 
-| Key | Root | m2      | M2 | m3      | M3 | P4     | Tritone      | P5 | m6      | M6 | m7     | M7 |
-|-----|------|---------|----|---------|----|--------|--------------|----|---------|----|--------|----|
-| C   | C    | Db      | D  | Eb      | E  | F      | F# / Gb      | G  | Ab      | A  | Bb     | B  |
-| G   | G    | Ab      | A  | Bb      | B  | C      | C# / Db      | D  | Eb      | E  | Fn     | F# |
-| D   | D    | Eb      | E  | Fn      | F# | G      | G# / Ab      | A  | Bb      | B  | Cn     | C# |
-| A   | A    | Bb      | B  | Cn      | C# | D      | D# / Eb      | E  | Fn      | F# | Gn     | G# |
-| E   | E    | Fn      | F# | Gn      | G# | A      | A# / Bb      | B  | Cn      | C# | Dn     | D# |
-| B   | B    | Cn      | C# | Dn      | D# | E      | E# (F) / Fn  | F# | Gn      | G# | An     | A# |
-| Gb  | Gb   | Abb (G) | Ab | Bbb (A) | Bb | Cb (B) | Cn / Dbb (C) | Db | Ebb (D) | Eb | Fb (E) | F  |
-| Db  | Db   | Ebb (D) | Eb | Fb (E)  | F  | Gb     | Gn / Abb (G) | Ab | Bbb (A) | Bb | Cb (B) | C  |
-| Ab  | Ab   | Bbb (A) | Bb | Cb (B)  | C  | Db     | Dn / Ebb (D) | Eb | Fb (E)  | F  | Gb     | G  |
-| Eb  | Eb   | Fb (E)  | F  | Gb      | G  | Ab     | An / Bbb (A) | Bb | Cb (B)  | C  | Db     | D  |
-| Bb  | Bb   | Cb (B)  | C  | Db      | D  | Eb     | En / Fb (E)  | F  | Gb      | G  | Ab     | A  |
-| F   | F    | Gb      | G  | Ab      | A  | Bb     | Bn / Cb (B)  | C  | Db      | D  | Eb     | E  |
+| Key | m2      | M2 | m3      | M3 | P4     | Tritone      | P5 | m6      | M6 | m7     | M7 |
+|-----|---------|----|---------|----|--------|--------------|----|---------|----|--------|----|
+| C   | Db      | D  | Eb      | E  | F      | F# / Gb      | G  | Ab      | A  | Bb     | B  |
+| G   | Ab      | A  | Bb      | B  | C      | C# / Db      | D  | Eb      | E  | Fn     | F# |
+| D   | Eb      | E  | Fn      | F# | G      | G# / Ab      | A  | Bb      | B  | Cn     | C# |
+| A   | Bb      | B  | Cn      | C# | D      | D# / Eb      | E  | Fn      | F# | Gn     | G# |
+| E   | Fn      | F# | Gn      | G# | A      | A# / Bb      | B  | Cn      | C# | Dn     | D# |
+| B   | Cn      | C# | Dn      | D# | E      | E# (F) / Fn  | F# | Gn      | G# | An     | A# |
+| Gb  | Abb (G) | Ab | Bbb (A) | Bb | Cb (B) | Cn / Dbb (C) | Db | Ebb (D) | Eb | Fb (E) | F  |
+| Db  | Ebb (D) | Eb | Fb (E)  | F  | Gb     | Gn / Abb (G) | Ab | Bbb (A) | Bb | Cb (B) | C  |
+| Ab  | Bbb (A) | Bb | Cb (B)  | C  | Db     | Dn / Ebb (D) | Eb | Fb (E)  | F  | Gb     | G  |
+| Eb  | Fb (E)  | F  | Gb      | G  | Ab     | An / Bbb (A) | Bb | Cb (B)  | C  | Db     | D  |
+| Bb  | Cb (B)  | C  | Db      | D  | Eb     | En / Fb (E)  | F  | Gb      | G  | Ab     | A  |
+| F   | Gb      | G  | Ab      | A  | Bb     | Bn / Cb (B)  | C  | Db      | D  | Eb     | E  |
 
 Note: Some people like to use the key of C# instead of Db, the key of Cb instead of B, and the key
 of F# instead of Gb.  I've chosen to omit them in order to remove duplicates and simplify the table.
