@@ -5,8 +5,9 @@ Frequency values are calculated using the formula:
 
 Frequency = 440 &times; 2<sup><sup>(MIDI Note - 69)</sup>/<sub>12</sub></sup>
 
-The value 69 is chosen because that is the MIDI Note of A in octave 4, which should be set to 440
-hertz.
+The value 69 is chosen because that is the MIDI Note of A4, which should be set to 440 hertz.
+
+A typical 88-key piano starts at A0 and ends C8.
 
 | Note | Octave | Frequency (Hz)   | MIDI Note | (hex)|
 |:-----|-------:|-----------------:|----------:|------|
