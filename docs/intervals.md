@@ -7,6 +7,7 @@ Whole-step: Two half-steps.
 
 | Half-Steps | Interval    | Abbr. | Notes                       |
 |------------|-------------|-------|-----------------------------|
+| 0          | Unison      | -     |                             |
 | 1          | minor 2nd   | m2    |                             |
 | 2          | Major 2nd   | M2    |                             |
 | 3          | minor 3rd   | m3    |                             |
