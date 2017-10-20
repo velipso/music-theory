@@ -1,6 +1,10 @@
 Notes
 =====
 
+Frequency values are calculated using the formula:
+
+Frequency = 440 &times; 2<sup><sup>(MIDI Note - 69)</sup>/<sub>12</sub></sup>
+
 | Note | Octave | Frequency (Hz)   | MIDI Note |
 |:-----|-------:|-----------------:|----------:|
 | C    |     -1 |     8.1757989156 |   0 `00` |
