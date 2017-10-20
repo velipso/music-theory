@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Note Frequency Calculation</title>
+	<style>
+html, body {
+	font-family: sans-serif;
+}
+table {
+	border-collapse: collapse;
+}
+td, th {
+	border-left: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+	border-right: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	padding: 4px;
+}
+th {
+	border: 1px solid #777;
+	background-color: #aaa;
+}
+tr:nth-child(even){
+	background-color: #eee;
+}
+	</style>
+</head>
+<body>
+	<script>
+
+// setup to create the table
+var table = document.createElement('table');
+document.body.appendChild(table);
+
+var thead = document.createElement('thead');
+table.appendChild(thead);
+
+var tr = document.createElement('tr');
+thead.appendChild(tr);
+
+var head = ['Note', 'Octave', 'Freqency', 'MIDI Note'];
+for (var i = 0; i < head.length; i++){
+	var th = document.createElement('th');
+	tr.appendChild(th);
+	th.appendChild(document.createTextNode(head[i]));
+}
+
+var tbody = document.createElement('tbody');
+table.appendChild(tbody);
+
+function addRow(row){
+	var tr = document.createElement('tr');
+	tbody.appendChild(tr);
+	for (var i = 0; i < row.length; i++){
+		var td = document.createElement('td');
+		tr.appendChild(td);
+		td.appendChild(document.createTextNode(row[i]));
+	}
+}
+
+// the actual calculation
+for (var i = 0; i < 128; i++){
+	var note = (['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'])[i % 12];
+	var octave = Math.floor(i / 12) - 1;
+	var freq = 440 * Math.pow(2, (i - 59) / 12);
+	addRow([note, octave.toString(), freq.toFixed(10), i.toString()]);
+}
+
+	</script>
+</body>
+</html>

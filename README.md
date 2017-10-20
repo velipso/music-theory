@@ -7,6 +7,7 @@ around if you like.
 Documents
 ---------
 
+* [Notes](https://github.com/voidqk/music-theory/blob/master/docs/notes.md)
 * [Intervals](https://github.com/voidqk/music-theory/blob/master/docs/intervals.md)
 
 Scripts
