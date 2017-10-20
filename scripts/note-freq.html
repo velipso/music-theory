@@ -4,6 +4,7 @@
 	<title>Note Frequency Calculation</title>
 	<style>
 html, body {
+	background: #eef;
 	font-family: sans-serif;
 }
 table {
@@ -22,6 +23,9 @@ th {
 }
 tr:nth-child(even){
 	background-color: #eee;
+}
+tr:nth-child(odd){
+	background-color: #fff;
 }
 	</style>
 </head>
@@ -55,6 +59,8 @@ function addRow(row){
 		var td = document.createElement('td');
 		tr.appendChild(td);
 		td.appendChild(document.createTextNode(row[i]));
+		if (i > 0)
+			td.style.textAlign = 'right';
 	}
 }
 
@@ -62,7 +68,7 @@ function addRow(row){
 for (var i = 0; i < 128; i++){
 	var note = (['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'])[i % 12];
 	var octave = Math.floor(i / 12) - 1;
-	var freq = 440 * Math.pow(2, (i - 59) / 12);
+	var freq = 440 * Math.pow(2, (i - 69) / 12);
 	addRow([note, octave.toString(), freq.toFixed(10), i.toString()]);
 }
 

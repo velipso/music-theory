@@ -13,4 +13,4 @@ Documents
 Scripts
 -------
 
-* ...
+* [Note Frequency Calculator](https://rawgit.com/voidqk/music-theory/master/scripts/note-freq.html)
