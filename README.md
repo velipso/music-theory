@@ -9,6 +9,7 @@ Documents
 
 * [Notes](https://github.com/voidqk/music-theory/blob/master/docs/notes.md)
 * [Intervals](https://github.com/voidqk/music-theory/blob/master/docs/intervals.md)
+* [Pop Chord Progressions](https://github.com/voidqk/music-theory/blob/master/docs/pop-prog.md)
 
 Scripts
 -------
