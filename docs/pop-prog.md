@@ -1,21 +1,20 @@
 Pop Chord Progressions
 ======================
 
-| Major Chord | Description                            | Typical Usage                                                           |
-|-------------|----------------------------------------|-------------------------------------------------------------------------|
-| I           | Home, stable, safe                     | Start here and come back                                                |
-| ii          | Transition chord                       | Anywhere; substitute/after/before for IV; Pre-Cadence; ii-V-I; IV-ii-IV |
-| iii         | Moody                                  | Before IV or vi; stepwise between ii and IV                             |
-| IV          | Second furthest away, medium pull to I | Cadence chord (4 bars); Pre-Cadence                                     |
-| V           | Furthest away, strongest pull to I     | Cadence chord (4 or 8 bars)                                             |
-| vi          | Sad, most popular of the minors        | After I, or before/after IV or V                                        |
-| vii&deg;    | V7 without the root                    | Probably as a substitute for V with the bass playing the 5th            |
+| Major Chord     | Description                            | Typical Usage                                                           |
+|-----------------|----------------------------------------|-------------------------------------------------------------------------|
+| I               | Home, stable, safe                     | Start here and come back                                                |
+| ii              | Transition chord                       | Anywhere; substitute/after/before for IV; Pre-Cadence; ii-V-I; IV-ii-IV |
+| iii             | Moody                                  | Before IV or vi; stepwise between ii and IV                             |
+| IV              | Second furthest away, medium pull to I | Cadence chord (4 bars); Pre-Cadence                                     |
+| V               | Furthest away, strongest pull to I     | Cadence chord (4 or 8 bars)                                             |
+| vi              | Sad, most popular of the minors        | After I, or before/after IV or V                                        |
+| vii<sup>o</sup> | V7 without the root                    | Probably as a substitute for V with the bass playing the 5th            |
 
 The "cadence chord" is the chord used immediately before repeating progression, so it typically
 comes before the I chord since the I chord typically starts a progression.
 
 The "pre-cadence chord" is immediately before the cadence chord.
-
 
 Examples in Pop music
 ---------------------
@@ -43,6 +42,8 @@ Examples in Pop music
 | Heroes                     | Alesso                              | I / iii / vi / IV                                                              |
 | Price Tag                  | Jessie J                            | I / iii / vi / IV                                                              |
 | American                   | Lana Del Rey                        | I / iii / I / iii / IV / ii / IV / ii / vi / IV                                |
+| Vienna                     | The Fray                            | I / Isus2 / Isus4 / I / IV / IV / IV / IV                                      |
+| This is the Last Time      | Keane                               | I / IM7 / IV / I                                                               |
 | Holiday                    | Green Day                           | vi / IV / I / V                                                                |
 | It's My Life               | Bon Jobi                            | vi / IV / I / V                                                                |
 | Grenade                    | Bruno Mars                          | vi / IV / I / V                                                                |
@@ -56,9 +57,13 @@ Some Strategies
 
 * Use major chords in verse, then surprise the listener minor chords in chorus
 * Use more minor chords in verse, then brighten for chorus with just major chords
+* Pedal Point - keep the bass note the same (usually root) under all chords (Van Halen - Jump,
+  Survivor - Eye of the Tiger)
+* Change chord quality to create melodic lines (ex: IM7 / Isus2 / I / Isus4)
 
 Recommended Resources
 ---------------------
 
 * [Song Science #1 by RW Studio](https://www.udemy.com/songtheory1)
+* [Song Science #2 by RW Studio](https://www.udemy.com/songtheory2)
 * [List of songs containing the I-V-vi-IV progression](https://en.wikipedia.org/wiki/List_of_songs_containing_the_I%E2%80%93V%E2%80%93vi%E2%80%93IV_progression)
