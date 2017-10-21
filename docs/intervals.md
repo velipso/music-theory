@@ -5,21 +5,21 @@ Half-step: Two notes immediately adjacent to each other (i.e., C to C#).
 
 Whole-step: Two half-steps.
 
-| Half-Steps | Interval    | Abbr. | Notes                       |
-|------------|-------------|-------|-----------------------------|
-| 0          | Unison      | -     |                             |
-| 1          | minor 2nd   | m2    |                             |
-| 2          | Major 2nd   | M2    |                             |
-| 3          | minor 3rd   | m3    |                             |
-| 4          | Major 3rd   | M2    |                             |
-| 5          | Perfect 4th | P4    |                             |
-| 6          | Tritone     | -     |                             |
-| 7          | Perfect 5th | P5    |                             |
-| 8          | minor 6th   | m6    |                             |
-| 9          | Major 6th   | M6    |                             |
-| 10         | minor 7th   | m7    | Also known as dominant 7th. |
-| 11         | Major 7th   | M7    |                             |
-| 12         | Octave      | -     |                             |
+| Half-Steps | Interval    | Abbr. | Notes                      |
+|------------|-------------|-------|----------------------------|
+| 0          | Unison      | -     |                            |
+| 1          | minor 2nd   | m2    |                            |
+| 2          | Major 2nd   | M2    |                            |
+| 3          | minor 3rd   | m3    |                            |
+| 4          | Major 3rd   | M2    |                            |
+| 5          | Perfect 4th | P4    |                            |
+| 6          | Tritone     | -     |                            |
+| 7          | Perfect 5th | P5    |                            |
+| 8          | minor 6th   | m6    |                            |
+| 9          | Major 6th   | M6    |                            |
+| 10         | minor 7th   | m7    | Also known as dominant 7th |
+| 11         | Major 7th   | M7    |                            |
+| 12         | Octave      | -     |                            |
 
 Intervals for each Major Key
 ----------------------------
