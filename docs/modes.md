@@ -16,6 +16,9 @@ if the 3rd scale degree is flat (Dorian, Aeolian, Phrygian, Locrian).
 | .          | Phrygian        | - | b | b | - | - | b | b |
 | Darkest    | Locrian         | - | b | b | - | b | b | b |
 
+For example, calculating the Dorian mode of C starts by looking at C Major, then flattening the 3rd
+and 7th scale degrees (C D E F G A B -> C D Eb F G A Bb).
+
 Locrian is rarely used because the I chord is diminished, which makes it very hard to associate it
 with the tonal center.
 
