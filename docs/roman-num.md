@@ -32,15 +32,15 @@ Triads
 | Half-Diminished | m3 + Tritone + m7 |
 | Diminished 7th  | m3 + Tritone + M6 |
 
-| Scale Degree | Major 7th | Dominant 7th | Minor 7th | Half-Diminished                  | Diminished 7th                              |
-|--------------|-----------|--------------|-----------|----------------------------------|---------------------------------------------|
-| 1            | IM7       | I7           | I-7       | I-7(b5), I<sup>&oslash</sup>     | Idim7, I<sup>o7</sup>, I<sup>o</sup>7       |
-| 2            | IIM7      | II7          | II-7      | II-7(b5), I<sup>&oslash</sup>    | IIdim7, II<sup>o7</sup>, II<sup>o</sup>7    |
-| 3            | IIIM7     | III7         | III-7     | III-7(b5), III<sup>&oslash</sup> | IIIdim7, III<sup>o7</sup>, III<sup>o</sup>7 |
-| 4            | IVM7      | IV7          | IV-7      | IV-7(b5), IV<sup>&oslash</sup>   | IVdim7, IV<sup>o7</sup>, IV<sup>o</sup>7    |
-| 5            | VM7       | V7           | V-7       | V-7(b5), V<sup>&oslash</sup>     | Vdim7, V<sup>o7</sup>, V<sup>o</sup>7       |
-| 6            | VIM7      | VI7          | VI-7      | VI-7(b5), VI<sup>&oslash</sup>   | VIdim7, VI<sup>o7</sup>, VI<sup>o</sup>7    |
-| 7            | VIIM7     | VII7         | VII-7     | VII-7(b5), VII<sup>&oslash</sup> | VIIdim7, VII<sup>o7</sup>, VII<sup>o</sup>7 |
+| Scale Degree | Major 7th | Dominant 7th | Minor 7th | Half-Diminished                   | Diminished 7th                              |
+|--------------|-----------|--------------|-----------|-----------------------------------|---------------------------------------------|
+| 1            | IM7       | I7           | I-7       | I-7(b5), I<sup>&oslash;</sup>     | Idim7, I<sup>o7</sup>, I<sup>o</sup>7       |
+| 2            | IIM7      | II7          | II-7      | II-7(b5), I<sup>&oslash;</sup>    | IIdim7, II<sup>o7</sup>, II<sup>o</sup>7    |
+| 3            | IIIM7     | III7         | III-7     | III-7(b5), III<sup>&oslash;</sup> | IIIdim7, III<sup>o7</sup>, III<sup>o</sup>7 |
+| 4            | IVM7      | IV7          | IV-7      | IV-7(b5), IV<sup>&oslash;</sup>   | IVdim7, IV<sup>o7</sup>, IV<sup>o</sup>7    |
+| 5            | VM7       | V7           | V-7       | V-7(b5), V<sup>&oslash;</sup>     | Vdim7, V<sup>o7</sup>, V<sup>o</sup>7       |
+| 6            | VIM7      | VI7          | VI-7      | VI-7(b5), VI<sup>&oslash;</sup>   | VIdim7, VI<sup>o7</sup>, VI<sup>o</sup>7    |
+| 7            | VIIM7     | VII7         | VII-7     | VII-7(b5), VII<sup>&oslash;</sup> | VIIdim7, VII<sup>o7</sup>, VII<sup>o</sup>7 |
 
 Sharp or Flat Prefix
 --------------------
