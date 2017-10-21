@@ -12,7 +12,7 @@ if the 3rd scale degree is flat (Dorian, Aeolian, Phrygian, Locrian).
 | .          | Ionian (Major)  | - | - | - | - | - | - | - |
 | .          | Mixolydian      | - | - | - | - | - | - | b |
 | .          | Dorian          | - | - | b | - | - | - | b |
-| .          | Aeolian         | - | - | b | - | - | b | b |
+| .          | Aeolian (Minor) | - | - | b | - | - | b | b |
 | .          | Phrygian        | - | b | b | - | - | b | b |
 | Darkest    | Locrian         | - | b | b | - | b | b | b |
 
