@@ -50,3 +50,5 @@ degree specified by the roman numeral, and sharpen or flatten it a semi-tone bef
 the rest of the chord.
 
 For example, a bIIIM7 in the key of C would be EbM7, or Eb + G + Bb + D.
+
+Note that the sharp or flat is in relation to the Ionian mode (Major key).
