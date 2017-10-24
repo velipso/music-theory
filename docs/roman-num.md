@@ -4,12 +4,12 @@ Roman Numeral Notation
 Triads
 ------
 
-| Triad      | Intervals         |
-|------------|-------------------|
-| Augmented  | UN + M3 + m6      |
-| Major      | UN + M3 + P5      |
-| Minor      | UN + m3 + P5      |
-| Diminished | UN + m3 + Tritone |
+| Triad      | Intervals    |
+|------------|--------------|
+| Augmented  | UN + M3 + m6 |
+| Major      | UN + M3 + P5 |
+| Minor      | UN + m3 + P5 |
+| Diminished | UN + m3 + TR |
 
 | Scale Degree | Augmented       | Major | Minor | Diminished      |
 |--------------|-----------------|-------|-------|-----------------|
@@ -24,13 +24,13 @@ Triads
 7th Chords
 ----------
 
-| 7th Chord       | Intervals              |
-|-----------------|------------------------|
-| Major 7th       | UN + M3 + P5 + M7      |
-| Dominant 7th    | UN + M3 + P5 + m7      |
-| Minor 7th       | UN + m3 + P5 + m7      |
-| Half-Diminished | UN + m3 + Tritone + m7 |
-| Diminished 7th  | UN + m3 + Tritone + M6 |
+| 7th Chord       | Intervals         |
+|-----------------|-------------------|
+| Major 7th       | UN + M3 + P5 + M7 |
+| Dominant 7th    | UN + M3 + P5 + m7 |
+| Minor 7th       | UN + m3 + P5 + m7 |
+| Half-Diminished | UN + m3 + TR + m7 |
+| Diminished 7th  | UN + m3 + TR + M6 |
 
 | Scale Degree | Major 7th | Dominant 7th | Minor 7th | Half-Diminished                   | Diminished 7th                              |
 |--------------|-----------|--------------|-----------|-----------------------------------|---------------------------------------------|
