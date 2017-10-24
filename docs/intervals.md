@@ -5,21 +5,21 @@ Half-step: Two notes immediately adjacent to each other (i.e., C to C#).
 
 Whole-step: Two half-steps.
 
-| Half-Steps | Interval    | Abbr. | Notes                      |
-|------------|-------------|-------|----------------------------|
-| 0          | Unison      | UN    |                            |
-| 1          | minor 2nd   | m2    |                            |
-| 2          | Major 2nd   | M2    |                            |
-| 3          | minor 3rd   | m3    |                            |
-| 4          | Major 3rd   | M2    |                            |
-| 5          | Perfect 4th | P4    |                            |
-| 6          | Tritone     | TR    |                            |
-| 7          | Perfect 5th | P5    |                            |
-| 8          | minor 6th   | m6    |                            |
-| 9          | Major 6th   | M6    |                            |
-| 10         | minor 7th   | m7    | Also known as dominant 7th |
-| 11         | Major 7th   | M7    |                            |
-| 12         | Octave      | -     |                            |
+| Half-Steps | Interval    | Abbr. | Alt.    | Notes                      |
+|------------|-------------|-------|---------|----------------------------|
+| 0          | Unison      | UN    |  1      |                            |
+| 1          | minor 2nd   | m2    | m2,  m9 |                            |
+| 2          | Major 2nd   | M2    |  2,   9 |                            |
+| 3          | minor 3rd   | m3    | m3,  a9 |                            |
+| 4          | Major 3rd   | M2    |  3      |                            |
+| 5          | Perfect 4th | P4    |  4,  11 |                            |
+| 6          | Tritone     | TR    | d5, a11 |                            |
+| 7          | Perfect 5th | P5    |  5      |                            |
+| 8          | minor 6th   | m6    | a5, m13 |                            |
+| 9          | Major 6th   | M6    |  6,  13 |                            |
+| 10         | minor 7th   | m7    | m7      | Also known as dominant 7th |
+| 11         | Major 7th   | M7    |  7      |                            |
+| 12         | Octave      | -     |  -      |                            |
 
 Intervals for each Major Key
 ----------------------------
