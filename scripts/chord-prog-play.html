@@ -179,6 +179,12 @@ var noteHit = (function(){
 		Tempo: <input id="bpm" size="5" type="text" value="70" /> BPM
 	</p>
 	<p>
+		Volume:
+		<button onclick="javascript: addVolume(-10);">&larr;</button>
+		<span id="vol">?</span>
+		<button onclick="javascript: addVolume(10);">&rarr;</button>
+	</p>
+	<p>
 		Progression:
 	</p>
 	<textarea rows="20" cols="20" id="prog" spellcheck="false">I / vi
@@ -260,6 +266,14 @@ function setProg(p){
 	document.getElementById('prog').value = p.join('\n');
 }
 
+var volume = 50;
+
+function addVolume(v){
+	volume = Math.min(Math.max(volume + v, 10), 100);
+	document.getElementById('vol').innerHTML = volume === 100 ? 99 : volume;
+}
+addVolume(0);
+
 function add(ch){
 	var p = getProg();
 	p.push(ch);
@@ -283,10 +297,11 @@ var schedule = (function(){
 					document.getElementById('out').innerHTML = c;
 					return;
 				}
-				if (c[1] > 0)
-					setTimeout(function(){ noteHit(c[0], c[1]); }, Math.floor(Math.random() * 50));
+				var vel = c[1] * volume / 100;
+				if (vel > 0)
+					setTimeout(function(){ noteHit(c[0], vel); }, Math.floor(Math.random() * 50));
 				else
-					noteHit(c[0], 0);
+					noteHit(c[0], vel);
 			})(cmds[i]);
 		}
 	}
