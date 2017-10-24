@@ -5,7 +5,7 @@ Pop Chord Progressions
 |-----------------|----------------------------------------|-------------------------------------------------------------------------|
 | I               | Home, stable, safe                     | Start here and come back                                                |
 | ii              | Transition chord                       | Anywhere; substitute/after/before for IV; Pre-Cadence; ii-V-I; IV-ii-IV |
-| iii             | Moody                                  | Before IV or vi; stepwise between ii and IV                             |
+| iii             | Moody                                  | Before IV or vi; stepwise between ii and IV; interchange with I         |
 | IV              | Second furthest away, medium pull to I | Cadence chord (4 bars); Pre-Cadence                                     |
 | V               | Furthest away, strongest pull to I     | Cadence chord (4 or 8 bars)                                             |
 | vi              | Sad, most popular of the minors        | After I, or before/after IV or V                                        |

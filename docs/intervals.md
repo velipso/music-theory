@@ -7,13 +7,13 @@ Whole-step: Two half-steps.
 
 | Half-Steps | Interval    | Abbr. | Notes                      |
 |------------|-------------|-------|----------------------------|
-| 0          | Unison      | -     |                            |
+| 0          | Unison      | UN    |                            |
 | 1          | minor 2nd   | m2    |                            |
 | 2          | Major 2nd   | M2    |                            |
 | 3          | minor 3rd   | m3    |                            |
 | 4          | Major 3rd   | M2    |                            |
 | 5          | Perfect 4th | P4    |                            |
-| 6          | Tritone     | -     |                            |
+| 6          | Tritone     | TR    |                            |
 | 7          | Perfect 5th | P5    |                            |
 | 8          | minor 6th   | m6    |                            |
 | 9          | Major 6th   | M6    |                            |
@@ -24,7 +24,7 @@ Whole-step: Two half-steps.
 Intervals for each Major Key
 ----------------------------
 
-| Key | m2      | M2 | m3      | M3 | P4     | Tritone      | P5 | m6      | M6 | m7     | M7 |
+| Key | m2      | M2 | m3      | M3 | P4     | TR           | P5 | m6      | M6 | m7     | M7 |
 |-----|---------|----|---------|----|--------|--------------|----|---------|----|--------|----|
 | C   | Db      | D  | Eb      | E  | F      | F# / Gb      | G  | Ab      | A  | Bb     | B  |
 | G   | Ab      | A  | Bb      | B  | C      | C# / Db      | D  | Eb      | E  | Fn     | F# |
@@ -38,6 +38,21 @@ Intervals for each Major Key
 | Eb  | Fb (E)  | F  | Gb      | G  | Ab     | An / Bbb (A) | Bb | Cb (B)  | C  | Db     | D  |
 | Bb  | Cb (B)  | C  | Db      | D  | Eb     | En / Fb (E)  | F  | Gb      | G  | Ab     | A  |
 | F   | Gb      | G  | Ab      | A  | Bb     | Bn / Cb (B)  | C  | Db      | D  | Eb     | E  |
+
+| Key | B# C | C# Db | D Ebb | D# Eb | E  Fb | E# F | F# Gb | G Abb | G# Ab | A Bbb | A# Bb | B  Cb |
+|-----|------|-------|-------|-------|-------|------|-------|-------|-------|-------|-------|-------|
+| C   |  UN  |  m2   |  M2   |  m3   |  M3   |  P4  |  TR   |  P5   |  m6   |  M6   |  m7   |  M7   |
+| G   |  P4  |  TR   |  P5   |  m6   |  M6   |  m7  |  M7   |  UN   |  m2   |  M2   |  m3   |  M3   |
+| D   |  m7  |  M7   |  UN   |  m2   |  M2   |  m3  |  M3   |  P4   |  TR   |  P5   |  m6   |  M6   |
+| A   |  m3  |  M3   |  P4   |  TR   |  P5   |  m6  |  M6   |  m7   |  M7   |  UN   |  m2   |  M2   |
+| E   |  m6  |  M6   |  m7   |  M7   |  UN   |  m2  |  M2   |  m3   |  M3   |  P4   |  TR   |  P5   |
+| B   |  m2  |  M2   |  m3   |  M3   |  P4   |  TR  |  P5   |  m6   |  M6   |  m7   |  M7   |  UN   |
+| Gb  |  TR  |  P5   |  m6   |  M6   |  m7   |  M7  |  UN   |  m2   |  M2   |  m3   |  M3   |  P4   |
+| Db  |  M7  |  UN   |  m2   |  M2   |  m3   |  M3  |  P4   |  TR   |  P5   |  m6   |  M6   |  m7   |
+| Ab  |  M3  |  P4   |  TR   |  P5   |  m6   |  M6  |  m7   |  M7   |  UN   |  m2   |  M2   |  m3   |
+| Eb  |  M6  |  m7   |  M7   |  UN   |  m2   |  M2  |  m3   |  M3   |  P4   |  TR   |  P5   |  m6   |
+| Bb  |  M2  |  m3   |  M3   |  P4   |  TR   |  P5  |  m6   |  M6   |  m7   |  M7   |  UN   |  m2   |
+| F   |  P5  |  m6   |  M6   |  m7   |  M7   |  UN  |  m2   |  M2   |  m3   |  M3   |  P4   |  TR   |
 
 Note: Some people like to use the key of C# instead of Db, the key of Cb instead of B, and the key
 of F# instead of Gb.  I've chosen to omit them in order to remove duplicates and simplify the table.
