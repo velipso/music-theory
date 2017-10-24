@@ -278,12 +278,15 @@ var schedule = (function(){
 		my.next %= my.list.length;
 		var cmds = my.list[my.next++];
 		for (var i = 0; i < cmds.length; i++){
-			(function(cmd){
-				if (typeof cmd === 'string'){
-					document.getElementById('out').innerHTML = cmd;
+			(function(c){
+				if (typeof c === 'string'){
+					document.getElementById('out').innerHTML = c;
 					return;
 				}
-				setTimeout(function(){ noteHit(cmd[0], cmd[1]); }, Math.floor(Math.random() * 30));
+				if (c[1] > 0)
+					setTimeout(function(){ noteHit(c[0], c[1]); }, Math.floor(Math.random() * 50));
+				else
+					noteHit(c[0], 0);
 			})(cmds[i]);
 		}
 	}
