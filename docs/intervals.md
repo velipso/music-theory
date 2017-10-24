@@ -98,3 +98,36 @@ certain way *to aid playing*.
 If your goal is to understand the mathematics of music, it's annoying to remember that Fb is E, and
 G# is Ab -- afterall, it is *the same damn note, at the same damn frequency*.  But music notation
 is not designed to aid mathematical understanding.
+
+Intervals for each Major Key but up by P5
+-----------------------------------------
+
+| Key | P5 | M2 | M6 | M3 | M7 | TR           | m2      | m6      | m3      | m7     | P4     |
+|-----|----|----|----|----|----|--------------|---------|---------|---------|--------|--------|
+| C   | G  | D  | A  | E  | B  | F# / Gb      | Db      | Ab      | Eb      | Bb     | F      |
+| G   | D  | A  | E  | B  | F# | C# / Db      | Ab      | Eb      | Bb      | Fn     | C      |
+| D   | A  | E  | B  | F# | C# | G# / Ab      | Eb      | Bb      | Fn      | Cn     | G      |
+| A   | E  | B  | F# | C# | G# | D# / Eb      | Bb      | Fn      | Cn      | Gn     | D      |
+| E   | B  | F# | C# | G# | D# | A# / Bb      | Fn      | Cn      | Gn      | Dn     | A      |
+| B   | F# | C# | G# | D# | A# | E# (F) / Fn  | Cn      | Gn      | Dn      | An     | E      |
+| Gb  | Db | Ab | Eb | Bb | F  | Cn / Dbb (C) | Abb (G) | Ebb (D) | Bbb (A) | Fb (E) | Cb (B) |
+| Db  | Ab | Eb | Bb | F  | C  | Gn / Abb (G) | Ebb (D) | Bbb (A) | Fb (E)  | Cb (B) | Gb     |
+| Ab  | Eb | Bb | F  | C  | G  | Dn / Ebb (D) | Bbb (A) | Fb (E)  | Cb (B)  | Gb     | Db     |
+| Eb  | Bb | F  | C  | G  | D  | An / Bbb (A) | Fb (E)  | Cb (B)  | Gb      | Db     | Ab     |
+| Bb  | F  | C  | G  | D  | A  | En / Fb (E)  | Cb (B)  | Gb      | Db      | Ab     | Eb     |
+| F   | C  | G  | D  | A  | E  | Bn / Cb (B)  | Gb      | Db      | Ab      | Eb     | Bb     |
+
+| Key | B# C | G Abb | D Ebb | A Bbb | E  Fb | B  Cb | F# Gb | C# Db | G# Ab | D# Eb | A# Bb | E# F |
+|-----|------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|------|
+| C   |  UN  |  P5   |  M2   |  M6   |  M3   |  M7   |  TR   |  m2   |  m6   |  m3   |  m7   |  P4  |
+| G   |  P4  |  UN   |  P5   |  M2   |  M6   |  M3   |  M7   |  TR   |  m2   |  m6   |  m3   |  m7  |
+| D   |  m7  |  P4   |  UN   |  P5   |  M2   |  M6   |  M3   |  M7   |  TR   |  m2   |  m6   |  m3  |
+| A   |  m3  |  m7   |  P4   |  UN   |  P5   |  M2   |  M6   |  M3   |  M7   |  TR   |  m2   |  m6  |
+| E   |  m6  |  m3   |  m7   |  P4   |  UN   |  P5   |  M2   |  M6   |  M3   |  M7   |  TR   |  m2  |
+| B   |  m2  |  m6   |  m3   |  m7   |  P4   |  UN   |  P5   |  M2   |  M6   |  M3   |  M7   |  TR  |
+| Gb  |  TR  |  m2   |  m6   |  m3   |  m7   |  P4   |  UN   |  P5   |  M2   |  M6   |  M3   |  M7  |
+| Db  |  M7  |  TR   |  m2   |  m6   |  m3   |  m7   |  P4   |  UN   |  P5   |  M2   |  M6   |  M3  |
+| Ab  |  M3  |  M7   |  TR   |  m2   |  m6   |  m3   |  m7   |  P4   |  UN   |  P5   |  M2   |  M6  |
+| Eb  |  M6  |  M3   |  M7   |  TR   |  m2   |  m6   |  m3   |  m7   |  P4   |  UN   |  P5   |  M2  |
+| Bb  |  M2  |  M6   |  M3   |  M7   |  TR   |  m2   |  m6   |  m3   |  m7   |  P4   |  UN   |  P5  |
+| F   |  P5  |  M2   |  M6   |  M3   |  M7   |  TR   |  m2   |  m6   |  m3   |  m7   |  P4   |  UN  |
