@@ -444,8 +444,10 @@ function play(){
 function stop(){
 	schedule.list = [];
 	schedule.next = 0;
-	for (var i = 0; i < 128; i++)
-		noteHit(i, 0);
+	setTimeout(function(){
+		for (var i = 0; i < 128; i++)
+			noteHit(i, 0);
+	}, 500);
 }
 	</script>
 </body>
