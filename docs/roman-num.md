@@ -4,22 +4,24 @@ Roman Numeral Notation
 Triads
 ------
 
-| Triad      | Intervals    |
-|------------|--------------|
-| Augmented  | UN + M3 + m6 |
-| Major      | UN + M3 + P5 |
-| Minor      | UN + m3 + P5 |
-| Diminished | UN + m3 + TR |
+| Triad         | Intervals    |
+|---------------|--------------|
+| Augmented     | UN + M3 + m6 |
+| Major         | UN + M3 + P5 |
+| Suspended 4th | UN + M3 + P4 |
+| Minor         | UN + m3 + P5 |
+| Diminished    | UN + m3 + TR |
+| Suspended 2nd | UN + M2 + P5 |
 
-| Scale Degree | Augmented       | Major | Minor | Diminished      |
-|--------------|-----------------|-------|-------|-----------------|
-| 1            | I<sup>+</sup>   | I     | i     | i<sup>o</sup>   |
-| 2            | II<sup>+</sup>  | II    | ii    | ii<sup>o</sup>  |
-| 3            | III<sup>+</sup> | III   | iii   | iii<sup>o</sup> |
-| 4            | IV<sup>+</sup>  | IV    | iv    | iv<sup>o</sup>  |
-| 5            | V<sup>+</sup>   | V     | v     | v<sup>o</sup>   |
-| 6            | VI<sup>+</sup>  | VI    | vi    | vi<sup>o</sup>  |
-| 7            | VII<sup>+</sup> | VII   | vii   | vii<sup>o</sup> |
+| Scale Degree | Augmented       | Major | Suspended 4th | Minor | Diminished      | Suspended 2nd |
+|--------------|-----------------|-------|---------------|-------|-----------------|---------------|
+| 1            | I<sup>+</sup>   | I     | Isus          | i     | i<sup>o</sup>   | Isus2         |
+| 2            | II<sup>+</sup>  | II    | IIsus         | ii    | ii<sup>o</sup>  | IIsus2        |
+| 3            | III<sup>+</sup> | III   | IIIsus        | iii   | iii<sup>o</sup> | IIIsus2       |
+| 4            | IV<sup>+</sup>  | IV    | IVsus         | iv    | iv<sup>o</sup>  | IVsus2        |
+| 5            | V<sup>+</sup>   | V     | Vsus          | v     | v<sup>o</sup>   | Vsus2         |
+| 6            | VI<sup>+</sup>  | VI    | VIsus         | vi    | vi<sup>o</sup>  | VIsus2        |
+| 7            | VII<sup>+</sup> | VII   | VIIsus        | vii   | vii<sup>o</sup> | VIIsus2       |
 
 7th Chords
 ----------
