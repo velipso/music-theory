@@ -48,7 +48,7 @@ Examples in Pop music
 | It's My Life               | Bon Jobi                            | vi / IV / I / V                                                                |
 | Grenade                    | Bruno Mars                          | vi / IV / I / V                                                                |
 | Style                      | Taylor Swift                        | vi / IV / vi / IV / vi / IV / ii, V / IV // I / IV / I / IV / I / IV / vi / IV |
-| Hips Don't Lie             | Shakira                             | vi, iii / IV, ii / IV, V / vi                                                  |
+| Hips Don't Lie             | Shakira                             | i, v / bVI, iv / bVI, bVII / i                                                 |
 
 Note that vi / IV / I / V is the minor twin of I / V / vi / IV.
 
