@@ -29,3 +29,25 @@ because the mind can get locked into hearing C as the tonal center.
 It's better to focus on the differences between each mode and the Ionian mode, as this table is
 based on, so that you notice the actual scale differences using the same home position.  This lets
 the mind stay locked into a single tonal center, and feel the differences much easier.
+
+Triads
+------
+
+| Mode            | 1             | 2              | 3               | 4              | 5             | 6              | 7               |
+|-----------------|---------------|----------------|-----------------|----------------|---------------|----------------|-----------------|
+| Lydian          | I             | II             | iii             | iv<sup>o</sup> | V             | vi             | vii             |
+| Ionian (Major)  | I             | ii             | iii             | IV             | V             | vi             | vii<sup>o</sup> |
+| Mixolydian      | I             | ii             | iii<sup>o</sup> | IV             | v             | vi             | VII             |
+| Dorian          | i             | ii             | III             | IV             | v             | vi<sup>o</sup> | VII             |
+| Aeolian (Minor) | i             | ii<sup>o</sup> | III             | iv             | v             | VI             | VII             |
+| Phrygian        | i             | II             | III             | iv             | v<sup>o</sup> | VI             | vii             |
+| Locrian         | i<sup>o</sup> | II             | iii             | iv             | V             | VI             | vii             |
+
+Why is Ionian "Major" and Aeolian "Minor"?
+------------------------------------------
+
+Why are these two modes singled out?
+
+I don't know, but if you look at them, the Ionian is the only mode that has a major chord for the
+I, IV, and V, and the Aeolian is the only mode that has a minor chord for i, iv, and v.  I suspect
+that's why.
