@@ -64,3 +64,6 @@ Why are these two modes singled out?
 I don't know, but if you look at them, the Ionian is the only mode that has a major chord for the
 I, IV, and V, and the Aeolian is the only mode that has a minor chord for i, iv, and v.  I suspect
 that's why.
+
+The reasons the IV and V are important, in relation to the tonic, is because they are the P5 up and
+down from the root.
