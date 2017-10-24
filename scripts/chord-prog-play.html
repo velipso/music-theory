@@ -47,6 +47,10 @@ code {
 	background-color: #aaa;
 	text-align: center;
 	margin-top: 0;
+	margin-bottom: 0;
+}
+ol {
+	margin-top: 0;
 }
 	</style>
 	<script>
@@ -217,37 +221,37 @@ vi</textarea>
 		</thead>
 		<tbody>
 			<tr>
-				<td>1</td>
+				<td id="scale1">1</td>
 				<td><button onclick="javascript: add('I');">I</button></td>
 				<td><button onclick="javascript: add('i');">i</button></td>
 			</tr>
 			<tr>
-				<td>2</td>
+				<td id="scale2">2</td>
 				<td><button onclick="javascript: add('II');">II</button></td>
 				<td><button onclick="javascript: add('ii');">ii</button></td>
 			</tr>
 			<tr>
-				<td>3</td>
+				<td id="scale3">3</td>
 				<td><button onclick="javascript: add('III');">III</button></td>
 				<td><button onclick="javascript: add('iii');">iii</button></td>
 			</tr>
 			<tr>
-				<td>4</td>
+				<td id="scale4">4</td>
 				<td><button onclick="javascript: add('IV');">IV</button></td>
 				<td><button onclick="javascript: add('iv');">iv</button></td>
 			</tr>
 			<tr>
-				<td>5</td>
+				<td id="scale5">5</td>
 				<td><button onclick="javascript: add('V');">V</button></td>
 				<td><button onclick="javascript: add('v');">v</button></td>
 			</tr>
 			<tr>
-				<td>6</td>
+				<td id="scale6">6</td>
 				<td><button onclick="javascript: add('VI');">VI</button></td>
 				<td><button onclick="javascript: add('vi');">vi</button></td>
 			</tr>
 			<tr>
-				<td>7</td>
+				<td id="scale7">7</td>
 				<td><button onclick="javascript: add('VII');">VII</button></td>
 				<td><button onclick="javascript: add('vii');">vii</button></td>
 			</tr>
@@ -266,6 +270,7 @@ vi</textarea>
 		<button class="doit" onclick="javascript: stop();">STOP</button>
 	</p>
 	<p id="out">&nbsp;</p>
+	<p>Detected Modes: <span id="modes">?</span></p>
 	</div>
 	<script>
 
@@ -294,6 +299,31 @@ function add(ch){
 	p.push(ch);
 	setProg(p);
 }
+
+function updateScaleDegrees(){
+	var keyofe = document.getElementById('keyof');
+	var keyof = parseFloat(keyofe.options[keyofe.selectedIndex].value);
+	if (keyof < 0)
+		keyof += 12;
+	var keys = [
+		['C' , 'D' , 'E' , 'F' , 'G' , 'A' , 'B' ],
+		['Db', 'Eb', 'F' , 'Gb', 'Ab', 'Bb', 'C' ],
+		['D' , 'E' , 'F#', 'G' , 'A' , 'B' , 'C#'],
+		['Eb', 'F' , 'G' , 'Ab', 'Bb', 'C' , 'D' ],
+		['E' , 'F#', 'G#', 'A' , 'B' , 'C#', 'D#'],
+		['F' , 'G' , 'A' , 'Bb', 'C' , 'D' , 'E' ],
+		['Gb', 'Ab', 'Bb', 'Cb', 'Db', 'Eb', 'F' ],
+		['G' , 'A' , 'B' , 'C' , 'D' , 'E' , 'F#'],
+		['Ab', 'Bb', 'C' , 'Db', 'Eb', 'F' , 'G' ],
+		['A' , 'B' , 'C#', 'D' , 'E' , 'F#', 'G#'],
+		['Bb', 'C' , 'D' , 'Eb', 'F' , 'G' , 'A' ],
+		['B' , 'C#', 'D#', 'E' , 'F#', 'G#', 'A#']
+	];
+	for (var i = 1; i <= 7; i++)
+		document.getElementById('scale' + i).innerHTML = keys[keyof][i - 1];
+}
+document.getElementById('keyof').addEventListener('change', updateScaleDegrees);
+updateScaleDegrees();
 
 var schedule = (function(){
 	var my = {
@@ -452,6 +482,7 @@ function chordToBassTreble(chord){
 			if (body !== chord)
 				return false;
 			chord = '';
+			body = '';
 			break;
 		default:
 			return false;
@@ -469,7 +500,39 @@ function chordToBassTreble(chord){
 		treb.unshift(treb.pop() - 12);
 		rotate++;
 	}
-	return { chord: chord, bass: bass, treb: treb };
+	var simp = body;
+	if (shift != 0){
+		while (shift < 0){
+			simp = 'b' + simp;
+			shift++;
+		}
+		while (shift > 0){
+			simp = '#' + simp;
+			shift--;
+		}
+	}
+	return { chord: chord, simplified: simp, bass: bass, treb: treb };
+}
+
+function findModes(simps){
+	var modes = {
+		'Lydian': ['I', 'II', 'iii', '#ivo', 'V', 'vi', 'vii'],
+		'Ionian [Major]': ['I', 'ii', 'iii', 'IV', 'V', 'vi', 'viio'],
+		'Mixolydian': ['I', 'ii', 'iiio', 'IV', 'v', 'vi', 'bVII'],
+		'Dorian': ['i', 'ii', 'bIII', 'IV', 'v', 'vio', 'bVII'],
+		'Aeolian [Minor]': ['i', 'iio', 'bIII', 'iv', 'v', 'bVI', 'bVII'],
+		'Phrygian': ['i', 'bII', 'bIII', 'iv', 'vo', 'bVI', 'bvii'],
+		'Locrian': ['io', 'bII', 'biii', 'iv', 'bV', 'bVI', 'bvii']
+	};
+	var m = [];
+	for (var k in modes){
+		var found = true;
+		for (var i = 0; i < simps.length && found; i++)
+			found = modes[k].indexOf(simps[i]) >= 0;
+		if (found)
+			m.push(k);
+	}
+	return m;
 }
 
 function play(){
@@ -479,6 +542,7 @@ function play(){
 	var keyofe = document.getElementById('keyof');
 	var keyof = parseFloat(keyofe.options[keyofe.selectedIndex].value);
 	var chords = [];
+	var eachchord = {};
 	for (var i = 0; i < p.length; i++){
 		if (p[i].substr(0, 4) === 'BAD:')
 			continue;
@@ -507,8 +571,46 @@ function play(){
 			}
 			tbs.push(tb);
 		}
+		for (var j = 0; j < tbs.length; j++){
+			var s = tbs[j].simplified;
+			if (s !== ''){
+				if (typeof eachchord[s] !== 'number')
+					eachchord[s] = 0;
+				eachchord[s]++;
+			}
+		}
 		chords.push.apply(chords, tbs);
 	}
+	var simps = [];
+	for (var k in eachchord)
+		simps.push(k);
+	var modes = findModes(simps);
+	if (modes.length <= 0){
+		// search for modal interchange
+		// remove least common chord
+		var smallest = 99999;
+		for (var k in eachchord)
+			smallest = Math.min(smallest, eachchord[k]);
+		var smallchords = [];
+		for (var k in eachchord){
+			if (eachchord[k] === smallest)
+				smallchords.push(k);
+		}
+		for (var i = 0; i < smallchords.length; i++){
+			var simps2 = simps.concat();
+			simps2.splice(simps2.indexOf(smallchords[i]), 1); // remove chord
+			var modes2 = findModes(simps2);
+			for (var k = 0; k < modes2.length; k++)
+				modes2[k] += ' (ignoring <code>' + smallchords[i] + '</code>)';
+			modes = modes.concat(modes2);
+		}
+	}
+	if (modes.length <= 0)
+		modes = ['None'];
+	if (modes.length == 1)
+		document.getElementById('modes').innerHTML = modes[0];
+	else
+		document.getElementById('modes').innerHTML = '<ol><li>' + modes.join('</li><li>') + '</li></ol>';
 	schedule.list = notesToSchedule(chordsToNotes(keyof, chords));
 	var bpm = parseFloat(document.getElementById('bpm').value);
 	if (!isNaN(bpm) && bpm >= 30 && bpm <= 300)
