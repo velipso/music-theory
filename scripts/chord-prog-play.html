@@ -195,7 +195,10 @@ var noteHit = (function(){
 		</select>
 	</p>
 	<p>
-		Tempo: <input id="bpm" size="5" type="text" value="70" /> BPM
+		Tempo:
+		<button onclick="javascript: addBPM(-20);">&larr;</button>
+		<input id="bpm" size="4" type="text" value="70" />
+		<button onclick="javascript: addBPM(20);">&rarr;</button>
 	</p>
 	<p>
 		Volume:
@@ -204,7 +207,7 @@ var noteHit = (function(){
 		<button onclick="javascript: addVolume(10);">&rarr;</button>
 	</p>
 	<p>
-		Progression:
+		Progression: <button onclick="javascript: setProg([]);">Clear</button>
 	</p>
 	<textarea rows="20" cols="20" id="prog" spellcheck="false">I / vi
 I / vi
@@ -349,6 +352,16 @@ function addVolume(v){
 	document.getElementById('vol').innerHTML = volume === 100 ? 99 : volume;
 }
 addVolume(0);
+
+function addBPM(v){
+	var e = document.getElementById('bpm');
+	var n = parseFloat(e.value);
+	if (!isNaN(n))
+		n = Math.max(Math.min(n + v, 300), 30);
+	else
+		n = 120;
+	e.value = '' + n;
+}
 
 function add(ch){
 	var p = getProg();
