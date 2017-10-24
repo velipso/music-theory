@@ -33,15 +33,28 @@ the mind stay locked into a single tonal center, and feel the differences much e
 Triads
 ------
 
-| Mode            | 1             | 2              | 3               | 4              | 5             | 6              | 7               |
-|-----------------|---------------|----------------|-----------------|----------------|---------------|----------------|-----------------|
-| Lydian          | I             | II             | iii             | iv<sup>o</sup> | V             | vi             | vii             |
-| Ionian (Major)  | I             | ii             | iii             | IV             | V             | vi             | vii<sup>o</sup> |
-| Mixolydian      | I             | ii             | iii<sup>o</sup> | IV             | v             | vi             | VII             |
-| Dorian          | i             | ii             | III             | IV             | v             | vi<sup>o</sup> | VII             |
-| Aeolian (Minor) | i             | ii<sup>o</sup> | III             | iv             | v             | VI             | VII             |
-| Phrygian        | i             | II             | III             | iv             | v<sup>o</sup> | VI             | vii             |
-| Locrian         | i<sup>o</sup> | II             | iii             | iv             | V             | VI             | vii             |
+| Mode            | 1             | 2              | 3               | 4               | 5             | 6              | 7               |
+|-----------------|---------------|----------------|-----------------|-----------------|---------------|----------------|-----------------|
+| Lydian          | I             | II             | iii             | #iv<sup>o</sup> | V             | vi             | vii             |
+| Ionian (Major)  | I             | ii             | iii             | IV              | V             | vi             | vii<sup>o</sup> |
+| Mixolydian      | I             | ii             | iii<sup>o</sup> | IV              | v             | vi             | bVII            |
+| Dorian          | i             | ii             | bIII            | IV              | v             | vi<sup>o</sup> | bVII            |
+| Aeolian (Minor) | i             | ii<sup>o</sup> | bIII            | iv              | v             | bVI            | bVII            |
+| Phrygian        | i             | bII            | bIII            | iv              | v<sup>o</sup> | bVI            | bvii            |
+| Locrian         | i<sup>o</sup> | bII            | biii            | iv              | bV            | bVI            | bvii            |
+
+Sevenths
+--------
+
+| Mode            | 1                    | 2                    | 3                      | 4                      | 5                    | 6                     | 7                      |
+|-----------------|----------------------|----------------------|------------------------|------------------------|----------------------|-----------------------|------------------------|
+| Lydian          | IM7                  | II7                  | III-7                  | #IV<sup>&oslash;</sup> | VM7                  | VI-7                  | VII-7                  |
+| Ionian (Major)  | IM7                  | II-7                 | III-7                  | IVM7                   | V7                   | VI-7                  | VII<sup>&oslash;</sup> |
+| Mixolydian      | I7                   | II-7                 | III<sup>&oslash;</sup> | IVM7                   | V-7                  | VI-7                  | bVIIM7                 |
+| Dorian          | I-7                  | II-7                 | bIIIM7                 | IV7                    | V-7                  | VI<sup>&oslash;</sup> | bVIIM7                 |
+| Aeolian (Minor) | I-7                  | I<sup>&oslash;</sup> | bIIIM7                 | IV-7                   | V-7                  | bVIM7                 | bVII7                  |
+| Phrygian        | I-7                  | bIIM7                | bIII7                  | IV-7                   | V<sup>&oslash;</sup> | bVIM7                 | bVII-7                 |
+| Locrian         | I<sup>&oslash;</sup> | bIIM7                | bIII-7                 | IV-7                   | bVM7                 | bVI7                  | bVII-7                 |
 
 Why is Ionian "Major" and Aeolian "Minor"?
 ------------------------------------------
