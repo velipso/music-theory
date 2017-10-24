@@ -23,9 +23,19 @@ table button {
 	font-family: monospace;
 	width: 100%;
 }
+p {
+	line-height: 1.3em;
+	text-align: justify;
+}
 td, th {
 	padding: 2px 5px;
 	vertical-align: middle;
+}
+code {
+	background: #fff;
+	border: 1px solid #bbb;
+	padding: 2px;
+	font-size: 14px;
 }
 .doit {
 	font-size: 24px;
@@ -193,17 +203,14 @@ IV / V
 I
 I / - / IV / V&gt;
 vi&gt; / IV&gt;
-V&gt; / III&gt;
+V&gt;&gt; / III&gt;
 vi</textarea>
 	</div>
-	<div style="float: left; margin-left: 5em; min-width: 300px;">
-	<p>
-		Available Chords (click to add):
-	</p>
+	<div style="float: left; margin-left: 5em; width: 350px;">
 	<table>
 		<thead>
 			<tr>
-				<th>#</th>
+				<th>&nbsp;</th>
 				<th>Maj</th>
 				<th>Min</th>
 			</tr>
@@ -247,6 +254,14 @@ vi</textarea>
 		</tbody>
 	</table>
 	<p>
+		Chords can be prefixed with <code>#</code> or <code>b</code> to sharpen or flatten by a
+		semitone.
+	</p>
+	<p>
+		Chords can end with <code>&lt;</code> or <code>&gt;</code> multiple times to move down or up
+		the keys using inversions.
+	</p>
+	<p style="text-align: center;">
 		<button class="doit" onclick="javascript: play();">PLAY</button>
 		<button class="doit" onclick="javascript: stop();">STOP</button>
 	</p>
