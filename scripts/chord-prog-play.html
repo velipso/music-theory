@@ -21,7 +21,12 @@ button {
 }
 table button {
 	font-family: monospace;
-	width: 100%;
+	width: 50px;
+	margin: 0 2px;
+}
+button.fs {
+	width: 30px;
+	margin: 0;
 }
 p {
 	line-height: 1.3em;
@@ -222,45 +227,96 @@ vi</textarea>
 		<tbody>
 			<tr>
 				<td id="scale1">1</td>
-				<td><button onclick="javascript: add('I');">I</button></td>
-				<td><button onclick="javascript: add('i');">i</button></td>
+				<td>
+					<button class="fs" onclick="javascript: add('bI');">b</button
+					><button onclick="javascript: add('I');">I</button
+					><button class="fs" onclick="javascript: add('#I');">#</button>
+				</td>
+				<td>
+					<button class="fs" onclick="javascript: add('bi');">b</button
+					><button onclick="javascript: add('i');">i</button
+					><button class="fs" onclick="javascript: add('#i');">#</button></td>
 			</tr>
 			<tr>
 				<td id="scale2">2</td>
-				<td><button onclick="javascript: add('II');">II</button></td>
-				<td><button onclick="javascript: add('ii');">ii</button></td>
+				<td>
+					<button class="fs" onclick="javascript: add('bII');">b</button
+					><button onclick="javascript: add('II');">II</button
+					><button class="fs" onclick="javascript: add('#II');">#</button>
+				</td>
+				<td>
+					<button class="fs" onclick="javascript: add('bii');">b</button
+					><button onclick="javascript: add('ii');">ii</button
+					><button class="fs" onclick="javascript: add('#ii');">#</button>
+				</td>
 			</tr>
 			<tr>
 				<td id="scale3">3</td>
-				<td><button onclick="javascript: add('III');">III</button></td>
-				<td><button onclick="javascript: add('iii');">iii</button></td>
+				<td>
+					<button class="fs" onclick="javascript: add('bIII');">b</button
+					><button onclick="javascript: add('III');">III</button
+					><button class="fs" onclick="javascript: add('#III');">#</button>
+				</td>
+				<td>
+					<button class="fs" onclick="javascript: add('biii');">b</button
+					><button onclick="javascript: add('iii');">iii</button
+					><button class="fs" onclick="javascript: add('#iii');">#</button>
+				</td>
 			</tr>
 			<tr>
 				<td id="scale4">4</td>
-				<td><button onclick="javascript: add('IV');">IV</button></td>
-				<td><button onclick="javascript: add('iv');">iv</button></td>
+				<td>
+					<button class="fs" onclick="javascript: add('bIV');">b</button
+					><button onclick="javascript: add('IV');">IV</button
+					><button class="fs" onclick="javascript: add('#IV');">#</button>
+				</td>
+				<td>
+					<button class="fs" onclick="javascript: add('biv');">b</button
+					><button onclick="javascript: add('iv');">iv</button
+					><button class="fs" onclick="javascript: add('#iv');">#</button>
+				</td>
 			</tr>
 			<tr>
 				<td id="scale5">5</td>
-				<td><button onclick="javascript: add('V');">V</button></td>
-				<td><button onclick="javascript: add('v');">v</button></td>
+				<td>
+					<button class="fs" onclick="javascript: add('bV');">b</button
+					><button onclick="javascript: add('V');">V</button
+					><button class="fs" onclick="javascript: add('#V');">#</button>
+				</td>
+				<td>
+					<button class="fs" onclick="javascript: add('bv');">b</button
+					><button onclick="javascript: add('v');">v</button
+					><button class="fs" onclick="javascript: add('#v');">#</button>
+				</td>
 			</tr>
 			<tr>
 				<td id="scale6">6</td>
-				<td><button onclick="javascript: add('VI');">VI</button></td>
-				<td><button onclick="javascript: add('vi');">vi</button></td>
+				<td>
+					<button class="fs" onclick="javascript: add('bVI');">b</button
+					><button onclick="javascript: add('VI');">VI</button
+					><button class="fs" onclick="javascript: add('#VI');">#</button>
+				</td>
+				<td>
+					<button class="fs" onclick="javascript: add('bvi');">b</button
+					><button onclick="javascript: add('vi');">vi</button
+					><button class="fs" onclick="javascript: add('#vi');">#</button>
+				</td>
 			</tr>
 			<tr>
 				<td id="scale7">7</td>
-				<td><button onclick="javascript: add('VII');">VII</button></td>
-				<td><button onclick="javascript: add('vii');">vii</button></td>
+				<td>
+					<button class="fs" onclick="javascript: add('bVII');">b</button
+					><button onclick="javascript: add('VII');">VII</button
+					><button class="fs" onclick="javascript: add('#VII');">#</button>
+				</td>
+				<td>
+					<button class="fs" onclick="javascript: add('bvii');">b</button
+					><button onclick="javascript: add('vii');">vii</button
+					><button class="fs" onclick="javascript: add('#vii');">#</button>
+				</td>
 			</tr>
 		</tbody>
 	</table>
-	<p>
-		Chords can be prefixed with <code>#</code> or <code>b</code> to sharpen or flatten by a
-		semitone.
-	</p>
 	<p>
 		Chords can end with <code>&lt;</code> or <code>&gt;</code> multiple times to move down or up
 		the keys using inversions.
