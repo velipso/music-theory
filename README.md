@@ -17,3 +17,4 @@ Scripts
 -------
 
 * [Note Frequency Calculator](https://rawgit.com/voidqk/music-theory/master/scripts/note-freq.html)
+* [Chord Progression Player](https://rawgit.com/voidqk/music-theory/master/scripts/chord-prog-play.html)

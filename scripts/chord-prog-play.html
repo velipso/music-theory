@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!--
+(c) Copyright 2017, Sean Connelly (@voidqk), http://syntheti.cc
+MIT License
+Project Home: https://github.com/voidqk/music-theory
+-->
+	<title>Chord Progression Player</title>
+	<style>
+html, body {
+	background: #eef;
+	font-family: sans-serif;
+}
+input, select, option, textarea {
+	font-family: monospace;
+	font-size: 18px;
+}
+button {
+	font-size: 18px;
+}
+table button {
+	font-family: monospace;
+	width: 100%;
+}
+td, th {
+	padding: 2px 5px;
+	vertical-align: middle;
+}
+.doit {
+	font-size: 24px;
+}
+#out {
+	font-family: monospace;
+	font-size: 80px;
+	border: 1px solid #888;
+	background-color: #aaa;
+	text-align: center;
+	margin-top: 0;
+}
+	</style>
+	<script>
+var noteHit = (function(){
+	var opts = {
+		osc1type: "sine"  , osc1vol: 0.44, osc1tune:   0,
+		osc2type: "square", osc2vol: 0.29, osc2tune:  12,
+		osc3type: "sine"  , osc3vol: 0.21, osc3tune: -12,
+		attack  : 0.0,
+		decay   : 0.3,
+		sustain : 0.5,
+		susdecay: 5,
+		cutoff  : 36
+	};
+	var AudioContext = window.AudioContext || window.webkitAudioContext;
+	var ctx = new AudioContext();
+	function SimpleJSSynth(){
+		// copied and simplified from: https://github.com/voidqk/simple-js-synth
+		var filter = ctx.createBiquadFilter();
+		filter.type = 'lowpass';
+		filter.frequency.setValueAtTime(22050, ctx.currentTime);
+		filter.Q.setValueAtTime(0.5, ctx.currentTime);
+		var my = filter;
+		var gain = ctx.createGain();
+		gain.gain.setValueAtTime(0, ctx.currentTime);
+		gain.connect(filter);
+		function oscgain(v){
+			var g = ctx.createGain();
+			g.gain.setValueAtTime(0, ctx.currentTime);
+			g.connect(gain);
+			return { node: g, base: v };
+		}
+		var osc1gain = oscgain(opts.osc1vol);
+		var osc2gain = oscgain(opts.osc2vol);
+		var osc3gain = oscgain(opts.osc3vol);
+		function osctype(type, g){
+			var osc = ctx.createOscillator();
+			osc.type = type;
+			osc.connect(g);
+			return osc;
+		}
+		var osc1 = osctype(opts.osc1type, osc1gain.node);
+		var osc2 = osctype(opts.osc2type, osc2gain.node);
+		var osc3 = osctype(opts.osc3type, osc3gain.node);
+		function calctune(t){ return Math.pow(2, t / 12); }
+		var tune1 = calctune(opts.osc1tune);
+		var tune2 = calctune(opts.osc2tune);
+		var tune3 = calctune(opts.osc3tune);
+		var cutoff = calctune(opts.cutoff);
+		var eps = 0.001;
+		var attack   = Math.max(opts.attack  , eps);
+		var decay    = Math.max(opts.decay   , eps);
+		var sustain  = Math.max(opts.sustain , eps);
+		var susdecay = Math.max(opts.susdecay, eps);
+		var basefreq = 0;
+		var silent = 0;
+		var ndown = false;
+		osc1.start();
+		osc2.start();
+		osc3.start();
+		my.connect(ctx.destination);
+		my.noteOn = function(freq, vol){
+			ndown = true;
+			basefreq = freq;
+			var now = ctx.currentTime;
+			osc1.frequency.setValueAtTime(freq * tune1, now);
+			osc2.frequency.setValueAtTime(freq * tune2, now);
+			osc3.frequency.setValueAtTime(freq * tune3, now);
+			filter.frequency.setValueAtTime(Math.min(freq * cutoff, 22050), now);
+			osc1gain.node.gain.setValueAtTime(vol * osc1gain.base, now);
+			osc2gain.node.gain.setValueAtTime(vol * osc2gain.base, now);
+			osc3gain.node.gain.setValueAtTime(vol * osc3gain.base, now);
+			var v = gain.gain.value;
+			gain.gain.cancelScheduledValues(now);
+			gain.gain.setValueAtTime(v, now);
+			var hitpeak = now + attack;
+			var hitsus = hitpeak + decay * (1 - sustain);
+			silent = hitsus + susdecay;
+			gain.gain.linearRampToValueAtTime(1, hitpeak);
+			gain.gain.linearRampToValueAtTime(sustain, hitsus);
+			gain.gain.linearRampToValueAtTime(0.000001, silent);
+		};
+		my.noteOff = function(){
+			ndown = false;
+			var now = ctx.currentTime;
+			var v = gain.gain.value;
+			gain.gain.cancelScheduledValues(now);
+			gain.gain.setValueAtTime(v, now);
+			silent = now + decay * v;
+			gain.gain.linearRampToValueAtTime(0.000001, silent);
+		};
+		my.isReady = function(){
+			return ctx.currentTime >= silent && !ndown;
+		};
+		return my;
+	}
+	var pool = [];
+	for (var i = 0; i < 20; i++)
+		pool.push(SimpleJSSynth());
+	var notedown = [];
+	for (var i = 0; i < 128; i++)
+		notedown.push(false);
+	return function(note, vel){
+		if (notedown[note]){
+			notedown[note].noteOff();
+			notedown[note] = false;
+		}
+		if (vel <= 0)
+			return;
+		for (var i = 0; i < pool.length; i++){
+			if (pool[i].isReady()){
+				pool[i].noteOn(440 * Math.pow(2, (note - 69) / 12), vel);
+				notedown[note] = pool[i];
+				return;
+			}
+		}
+	};
+})();
+	</script>
+</head>
+<body>
+	<div style="float: left;">
+	<p>
+		Key: <select id="keyof">
+			<option value="0">C</option>
+			<option value="1">Db</option>
+			<option value="2">D</option>
+			<option value="3">Eb</option>
+			<option value="4">E</option>
+			<option value="5">F</option>
+			<option value="6">Gb</option>
+			<option value="-5">G</option>
+			<option value="-4">Ab</option>
+			<option value="-3">A</option>
+			<option value="-2">Bb</option>
+			<option value="-1">B</option>
+		</select>
+	</p>
+	<p>
+		Tempo: <input id="bpm" size="5" type="text" value="120" /> BPM
+	</p>
+	<p>
+		Progression:
+	</p>
+	<textarea rows="20" cols="20" id="prog" spellcheck="false">vi
+IV
+ii / V
+IV
+I
+IV
+vi
+IV
+	</textarea>
+	</div>
+	<div style="float: left; margin-left: 5em;">
+	<p>
+		Available Chords (click to add):
+	</p>
+	<table>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Maj</th>
+				<th>Min</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td><button onclick="javascript: add('I');">I</button></td>
+				<td><button onclick="javascript: add('i');">i</button></td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td><button onclick="javascript: add('II');">II</button></td>
+				<td><button onclick="javascript: add('ii');">ii</button></td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td><button onclick="javascript: add('III');">III</button></td>
+				<td><button onclick="javascript: add('iii');">iii</button></td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td><button onclick="javascript: add('IV');">IV</button></td>
+				<td><button onclick="javascript: add('iv');">iv</button></td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td><button onclick="javascript: add('V');">V</button></td>
+				<td><button onclick="javascript: add('v');">v</button></td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td><button onclick="javascript: add('VI');">VI</button></td>
+				<td><button onclick="javascript: add('vi');">vi</button></td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td><button onclick="javascript: add('VII');">VII</button></td>
+				<td><button onclick="javascript: add('vii');">vii</button></td>
+			</tr>
+		</tbody>
+	</table>
+	<p>
+		<button class="doit" onclick="javascript: play();">PLAY</button>
+		<button class="doit" onclick="javascript: stop();">STOP</button>
+	</p>
+	<p id="out">&nbsp;</p>
+	</div>
+	<script>
+
+function getProg(){
+	var p = document.getElementById('prog').value;
+	if (p.replace(/^\s+|\s+$/g, '') === '')
+		return [];
+	p.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+	return p.split('\n');
+}
+
+function setProg(p){
+	document.getElementById('prog').value = p.join('\n');
+}
+
+function add(ch){
+	var p = getProg();
+	p.push(ch);
+	setProg(p);
+}
+
+var schedule = (function(){
+	var my = {
+		list: [],
+		next: 0,
+		bpm: 120
+	};
+	function beat(){
+		if (my.list.length <= 0)
+			return;
+		my.next %= my.list.length;
+		var cmds = my.list[my.next++];
+		for (var i = 0; i < cmds.length; i++){
+			(function(cmd){
+				if (typeof cmd === 'string'){
+					document.getElementById('out').innerHTML = cmd;
+					return;
+				}
+				setTimeout(function(){ noteHit(cmd[0], cmd[1]); }, Math.floor(Math.random() * 30));
+			})(cmds[i]);
+		}
+	}
+	var acc = 0;
+	var last = performance.now();
+	function tick(){
+		var now = performance.now();
+		var dt = now - last;
+		last = now;
+		acc += dt;
+		if (acc >= 60000 / my.bpm){
+			acc = 0;
+			beat();
+		}
+	}
+	setInterval(tick, 0);
+	return my;
+})();
+
+function play(){
+	var CHORD_VEL = function(){ return Math.random() * 0.05 + 0.4; };
+	var BASS_VEL  = function(){ return Math.random() * 0.05 + 0.4; };
+	stop();
+	var p = getProg();
+	var bassNote = false;
+	var chordNotes = [];
+	var lastchordtxt = false;
+	var keyofe = document.getElementById('keyof');
+	var keyof = parseFloat(keyofe.options[keyofe.selectedIndex].value);
+	for (var i = 0; i < p.length; i++){
+		if (p[i].substr(0, 4) === 'BAD:')
+			continue;
+		if (p[i].replace(/\s/g, '') === '')
+			continue;
+		var row = p[i].split(' / ');
+		if (row.length == 1)
+			row = [row[0], '', '', ''];
+		else if (row.length == 2)
+			row = [row[0], '', row[1], ''];
+		else if (row.length == 3)
+			row = [row[0], row[1], row[2], ''];
+		else if (row.length > 4){
+			p[i] = 'BAD: ' + p[i];
+			setProg(p);
+			continue;
+		}
+
+		var valid = true;
+		var cmdss = [];
+		for (var j = 0; j < row.length; j++){
+			var cmds = [];
+			// first, silence any chord notes
+			if (j === 0 && bassNote !== false){
+				cmds.push([bassNote, 0]);
+				bassNote = false;
+			}
+			for (var n = 0; n < chordNotes.length; n++)
+				cmds.push([chordNotes[n], 0]);
+			// next, see if we have a new chord
+			var chordtxt = row[j].replace(/\s/g, '');
+			var chord = false;
+			var croot = false;
+			//  _____       _____ _____       _____ _____ _____
+			// | -2  |     |  1  |  3  |     |  6  |  8  | 10  |
+			// |_____|__ __|_____|_____|_____|_____|_____|_____|__
+			//    |  -1 |  0  |  2  |  4  |  5  |  7  |  9  | 11  |
+			//    |_____|_____|_____|_____|_____|_____|_____|_____|
+			switch (chordtxt){
+				case 'I'  : croot =  0; chord = [ 0, 4, 7]; break;
+				case 'II' : croot =  2; chord = [ 2, 6, 9]; break;
+				case 'III': croot =  4; chord = [-1, 4, 8]; break;
+				case 'IV' : croot =  5; chord = [ 0, 5, 9]; break;
+				case 'V'  : croot = -5; chord = [-1, 2, 7]; break;
+				case 'VI' : croot = -3; chord = [ 1, 4, 9]; break;
+				case 'VII': croot = -1; chord = [-1, 3, 6]; break;
+				case 'i'  : croot =  0; chord = [ 0, 3, 7]; break;
+				case 'ii' : croot =  2; chord = [ 2, 5, 9]; break;
+				case 'iii': croot =  4; chord = [-1, 4, 7]; break;
+				case 'iv' : croot =  5; chord = [ 0, 5, 8]; break;
+				case 'v'  : croot = -5; chord = [-2, 2, 7]; break;
+				case 'vi' : croot = -3; chord = [ 0, 4, 9]; break;
+				case 'vii': croot = -1; chord = [-1, 2, 6]; break;
+				case ''   : break;
+				default:
+					valid = false;
+					break;
+			}
+			if (!valid)
+				break;
+			if (chordtxt !== ''){
+				cmds.push(chordtxt);
+				lastchordtxt = chordtxt;
+			}
+			else if (lastchordtxt !== false)
+				cmds.push('<span style="color: #777;">' + lastchordtxt + '</span>');
+			if (chord !== false){
+				chordNotes = [];
+				for (var c = 0; c < chord.length; c++)
+					chordNotes.push(60 + keyof + chord[c]);
+				if (bassNote !== false){
+					cmds.push([bassNote, 0]);
+					cmds.push([bassNote - 12, 0]);
+					bassNote = false;
+				}
+			}
+			if (bassNote === false && croot !== false){
+				bassNote = 48 + keyof + croot;
+				cmds.push([bassNote, BASS_VEL()]);
+				cmds.push([bassNote - 12, BASS_VEL()]);
+			}
+			for (var n = 0; n < chordNotes.length; n++)
+				cmds.push([chordNotes[n], CHORD_VEL()]);
+			cmdss.push(cmds);
+		}
+		if (valid)
+			schedule.list.push.apply(schedule.list, cmdss);
+		else{
+			p[i] = 'BAD: ' + p[i];
+			setProg(p);
+			continue;
+		}
+	}
+	// on the first beat, silence the last beat's stuff
+	if (schedule.list.length > 0){
+		for (var n = 0; n < chordNotes.length; n++)
+			schedule.list[0].unshift([chordNotes[n], 0]);
+		if (bassNote !== false){
+			schedule.list[0].unshift([bassNote, 0]);
+			schedule.list[0].unshift([bassNote - 12, 0]);
+		}
+	}
+	var bpm = parseFloat(document.getElementById('bpm').value);
+	if (!isNaN(bpm) && bpm >= 30 && bpm <= 300)
+		schedule.bpm = bpm;
+}
+
+function stop(){
+	schedule.list = [];
+	schedule.next = 0;
+	for (var i = 0; i < 128; i++)
+		noteHit(i, 0);
+}
+	</script>
+</body>
+</html>
