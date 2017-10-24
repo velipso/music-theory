@@ -42,14 +42,14 @@ td, th {
 	<script>
 var noteHit = (function(){
 	var opts = {
-		osc1type: "sine"  , osc1vol: 0.44, osc1tune:   0,
-		osc2type: "square", osc2vol: 0.29, osc2tune:  12,
-		osc3type: "sine"  , osc3vol: 0.21, osc3tune: -12,
-		attack  : 0.0,
-		decay   : 0.3,
+		osc1type: "square"  , osc1vol: 0.3, osc1tune:   0,
+		osc2type: "sine"    , osc2vol: 0.2, osc2tune:  12,
+		osc3type: "triangle", osc3vol: 0.1, osc3tune: -12,
+		attack  : 0.02,
+		decay   : 1.0,
 		sustain : 0.5,
 		susdecay: 5,
-		cutoff  : 36
+		cutoff  : 15
 	};
 	var AudioContext = window.AudioContext || window.webkitAudioContext;
 	var ctx = new AudioContext();
@@ -176,19 +176,19 @@ var noteHit = (function(){
 		</select>
 	</p>
 	<p>
-		Tempo: <input id="bpm" size="5" type="text" value="120" /> BPM
+		Tempo: <input id="bpm" size="5" type="text" value="70" /> BPM
 	</p>
 	<p>
 		Progression:
 	</p>
-	<textarea rows="20" cols="20" id="prog" spellcheck="false">vi
-IV
-ii / V
-IV
+	<textarea rows="20" cols="20" id="prog" spellcheck="false">I / vi
+I / vi
+IV / V
 I
-IV
-vi
-IV</textarea>
+I / - / IV / V
+vi / IV
+V / III
+vi</textarea>
 	</div>
 	<div style="float: left; margin-left: 5em;">
 	<p>
@@ -369,7 +369,10 @@ function play(){
 				case 'v'  : croot = -5; chord = [-2, 2, 7]; break;
 				case 'vi' : croot = -3; chord = [ 0, 4, 9]; break;
 				case 'vii': croot = -1; chord = [-1, 2, 6]; break;
-				case ''   : break;
+				case '':
+				case '-':
+					chordtxt = '';
+					break;
 				default:
 					valid = false;
 					break;
