@@ -321,16 +321,148 @@ var schedule = (function(){
 	return my;
 })();
 
-function play(){
-	var CHORD_VEL = function(){ return Math.random() * 0.05 + 0.4; };
+function notesToSchedule(notes){
+	var list = [];
+	for (var i = 0; i < notes.length; i++)
+		list.push([]);
+	for (var i = 0; i < notes.length; i++){
+		var nt = notes[i];
+		for (var j = 0; j < nt.length; j++){
+			var n = nt[j];
+			if (typeof n === 'string')
+				list[i].unshift(n);
+			else{
+				var midi = n[0];
+				var vel  = n[1];
+				var dur  = n[2];
+				list[i].push([midi, vel]); // note on here
+				list[(i + dur) % list.length].unshift([midi, 0]); // note off `dur` later
+			}
+		}
+	}
+	return list;
+}
+
+function chordsToNotes(keyof, chords){
+	function hsc(str){ return ('' + str).replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+	var TREB_VEL = function(){ return Math.random() * 0.05 + 0.4; };
 	var BASS_VEL  = function(){ return Math.random() * 0.05 + 0.4; };
+	var notes = [];
+	var lastchord = '';
+	for (var i = 0; i < chords.length; i++){
+		var ch = chords[i];
+		var dur = 0;
+		var repeat = false;
+		if (ch.chord === ''){
+			repeat = true;
+			ch = lastch;
+		}
+		else{
+			lastch = ch;
+			for (dur = i + 1; dur < chords.length; dur++){
+				if (chords[dur].chord !== '')
+					break;
+			}
+			dur -= i;
+		}
+		// output notes using duration
+		var nt = [];
+		if (repeat)
+			nt.push('<span style="color: #777;">' + hsc(ch.chord) + '</span>');
+		else
+			nt.push(hsc(ch.chord));
+		if (!repeat){
+			// bass
+			nt.push([36 + ch.bass + keyof, BASS_VEL(), dur]);
+			nt.push([43 + ch.bass + keyof, BASS_VEL(), dur]);
+			nt.push([48 + ch.bass + keyof, BASS_VEL(), dur]);
+		}
+		// treble
+		for (var j = 0; j < ch.treb.length; j++)
+			nt.push([60 + ch.treb[j] + keyof, TREB_VEL(), 1]);
+		notes.push(nt);
+	}
+	return notes;
+}
+
+function chordToBassTreble(chord){
+	var body = chord;
+	var treb = false;
+	var bass = false;
+	var shift = 0;
+	var rotate = 0;
+	while (true){
+		if (body.charAt(0) === 'b'){
+			shift--;
+			body = body.substr(1);
+		}
+		else if (body.charAt(0) === '#'){
+			shift++;
+			body = body.substr(1);
+		}
+		if (body.charAt(body.length - 1) === '<'){
+			rotate--;
+			body = body.substr(0, body.length - 1);
+		}
+		else if (body.charAt(body.length - 1) === '>'){
+			rotate++;
+			body = body.substr(0, body.length - 1);
+		}
+		else
+			break;
+	}
+	//  _____       _____ _____       _____ _____ _____
+	// | -2  |     |  1  |  3  |     |  6  |  8  | 10  |
+	// |_____|__ __|_____|_____|_____|_____|_____|_____|__
+	//    |  -1 |  0  |  2  |  4  |  5  |  7  |  9  | 11  |
+	//    |_____|_____|_____|_____|_____|_____|_____|_____|
+	switch (body){
+		case 'I'  : bass =  0; treb = [ 0, 4, 7]; break;
+		case 'II' : bass =  2; treb = [ 2, 6, 9]; break;
+		case 'III': bass =  4; treb = [-1, 4, 8]; break;
+		case 'IV' : bass =  5; treb = [ 0, 5, 9]; break;
+		case 'V'  : bass = -5; treb = [-1, 2, 7]; break;
+		case 'VI' : bass = -3; treb = [ 1, 4, 9]; break;
+		case 'VII': bass = -1; treb = [-1, 3, 6]; break;
+		case 'i'  : bass =  0; treb = [ 0, 3, 7]; break;
+		case 'ii' : bass =  2; treb = [ 2, 5, 9]; break;
+		case 'iii': bass =  4; treb = [-1, 4, 7]; break;
+		case 'iv' : bass =  5; treb = [ 0, 5, 8]; break;
+		case 'v'  : bass = -5; treb = [-2, 2, 7]; break;
+		case 'vi' : bass = -3; treb = [ 0, 4, 9]; break;
+		case 'vii': bass = -1; treb = [-1, 2, 6]; break;
+		case ''   :
+		case '-'  :
+			if (body !== chord)
+				return false;
+			chord = '';
+			break;
+		default:
+			return false;
+	}
+	if (shift != 0){
+		bass += shift;
+		for (var i = 0; i < treb.length; i++)
+			treb[i] += shift;
+	}
+	while (rotate > 0){
+		treb.push(treb.shift() + 12);
+		rotate--;
+	}
+	while (rotate < 0){
+		treb.unshift(treb.pop() - 12);
+		rotate++;
+	}
+	return { chord: chord, bass: bass, treb: treb };
+}
+
+function play(){
 	stop();
 	var p = getProg();
-	var bassNote = false;
-	var chordNotes = [];
 	var lastchordtxt = false;
 	var keyofe = document.getElementById('keyof');
 	var keyof = parseFloat(keyofe.options[keyofe.selectedIndex].value);
+	var chords = [];
 	for (var i = 0; i < p.length; i++){
 		if (p[i].substr(0, 4) === 'BAD:')
 			continue;
@@ -348,94 +480,20 @@ function play(){
 			setProg(p);
 			continue;
 		}
-
-		var valid = true;
-		var cmdss = [];
+		var tbs = [];
 		for (var j = 0; j < row.length; j++){
-			var cmds = [];
-			// first, silence any chord notes
-			if (j === 0 && bassNote !== false){
-				cmds.push([bassNote, 0]);
-				bassNote = false;
-			}
-			for (var n = 0; n < chordNotes.length; n++)
-				cmds.push([chordNotes[n], 0]);
-			// next, see if we have a new chord
-			var chordtxt = row[j].replace(/\s/g, '');
-			var chord = false;
-			var croot = false;
-			//  _____       _____ _____       _____ _____ _____
-			// | -2  |     |  1  |  3  |     |  6  |  8  | 10  |
-			// |_____|__ __|_____|_____|_____|_____|_____|_____|__
-			//    |  -1 |  0  |  2  |  4  |  5  |  7  |  9  | 11  |
-			//    |_____|_____|_____|_____|_____|_____|_____|_____|
-			switch (chordtxt){
-				case 'I'  : croot =  0; chord = [ 0, 4, 7]; break;
-				case 'II' : croot =  2; chord = [ 2, 6, 9]; break;
-				case 'III': croot =  4; chord = [-1, 4, 8]; break;
-				case 'IV' : croot =  5; chord = [ 0, 5, 9]; break;
-				case 'V'  : croot = -5; chord = [-1, 2, 7]; break;
-				case 'VI' : croot = -3; chord = [ 1, 4, 9]; break;
-				case 'VII': croot = -1; chord = [-1, 3, 6]; break;
-				case 'i'  : croot =  0; chord = [ 0, 3, 7]; break;
-				case 'ii' : croot =  2; chord = [ 2, 5, 9]; break;
-				case 'iii': croot =  4; chord = [-1, 4, 7]; break;
-				case 'iv' : croot =  5; chord = [ 0, 5, 8]; break;
-				case 'v'  : croot = -5; chord = [-2, 2, 7]; break;
-				case 'vi' : croot = -3; chord = [ 0, 4, 9]; break;
-				case 'vii': croot = -1; chord = [-1, 2, 6]; break;
-				case '':
-				case '-':
-					chordtxt = '';
-					break;
-				default:
-					valid = false;
-					break;
-			}
-			if (!valid)
+			var tb = chordToBassTreble(row[j].replace(/\s/g, ''));
+			if (tb === false){
+				tbs = [];
+				p[i] = 'BAD: ' + p[i];
+				setProg(p);
 				break;
-			if (chordtxt !== ''){
-				cmds.push(chordtxt);
-				lastchordtxt = chordtxt;
 			}
-			else if (lastchordtxt !== false)
-				cmds.push('<span style="color: #777;">' + lastchordtxt + '</span>');
-			if (chord !== false){
-				chordNotes = [];
-				for (var c = 0; c < chord.length; c++)
-					chordNotes.push(60 + keyof + chord[c]);
-				if (bassNote !== false){
-					cmds.push([bassNote, 0]);
-					cmds.push([bassNote - 12, 0]);
-					bassNote = false;
-				}
-			}
-			if (bassNote === false && croot !== false){
-				bassNote = 48 + keyof + croot;
-				cmds.push([bassNote, BASS_VEL()]);
-				cmds.push([bassNote - 12, BASS_VEL()]);
-			}
-			for (var n = 0; n < chordNotes.length; n++)
-				cmds.push([chordNotes[n], CHORD_VEL()]);
-			cmdss.push(cmds);
+			tbs.push(tb);
 		}
-		if (valid)
-			schedule.list.push.apply(schedule.list, cmdss);
-		else{
-			p[i] = 'BAD: ' + p[i];
-			setProg(p);
-			continue;
-		}
+		chords.push.apply(chords, tbs);
 	}
-	// on the first beat, silence the last beat's stuff
-	if (schedule.list.length > 0){
-		for (var n = 0; n < chordNotes.length; n++)
-			schedule.list[0].unshift([chordNotes[n], 0]);
-		if (bassNote !== false){
-			schedule.list[0].unshift([bassNote, 0]);
-			schedule.list[0].unshift([bassNote - 12, 0]);
-		}
-	}
+	schedule.list = notesToSchedule(chordsToNotes(keyof, chords));
 	var bpm = parseFloat(document.getElementById('bpm').value);
 	if (!isNaN(bpm) && bpm >= 30 && bpm <= 300)
 		schedule.bpm = bpm;
