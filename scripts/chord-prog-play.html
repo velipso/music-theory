@@ -196,7 +196,7 @@ vi&gt; / IV&gt;
 V&gt; / III&gt;
 vi</textarea>
 	</div>
-	<div style="float: left; margin-left: 5em;">
+	<div style="float: left; margin-left: 5em; min-width: 300px;">
 	<p>
 		Available Chords (click to add):
 	</p>
@@ -368,7 +368,8 @@ function chordsToNotes(keyof, chords){
 		// output notes using duration
 		var nt = [];
 		if (repeat)
-			nt.push('<span style="color: #777;">' + hsc(ch.chord) + '</span>');
+			nt.push('<span style="color: #' +
+				(i % 2 == 0 ? '888' : '777') + ';">' + hsc(ch.chord) + '</span>');
 		else
 			nt.push(hsc(ch.chord));
 		if (!repeat){
