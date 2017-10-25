@@ -57,6 +57,9 @@ code {
 ol {
 	margin-top: 0;
 }
+select#prs, select#prs option {
+	font-family: sans-serif;
+}
 	</style>
 	<script>
 var noteHit = (function(){
@@ -207,9 +210,9 @@ var noteHit = (function(){
 		<button onclick="javascript: addVolume(10);">&rarr;</button>
 	</p>
 	<p>
-		Progression: <button onclick="javascript: setProg([]);">Clear</button>
+		Progression:
 	</p>
-	<textarea rows="20" cols="20" id="prog" spellcheck="false">I / vi
+	<textarea rows="20" cols="30" id="prog" spellcheck="false">I / vi
 I / vi
 IV / V
 I
@@ -217,6 +220,15 @@ I / - / IV / V&gt;
 vi&gt; / IV&gt;
 V&gt;&gt; / III&gt;
 vi</textarea>
+	<p>
+		<button onclick="javascript: setProg([]);">Clear</button>
+		<select id="prs" onchange="javascript: this.selectedIndex && setPreset(this.options[this.selectedIndex].value);">
+			<option>&ndash; Presets &ndash;</option>
+			<option value="0|70|I / vi|I / vi|IV / V|I|I / - / IV / V]|vi] / IV]|V]] / III]|vi">Hallelujah</option>
+			<option value="10|100|i / v]|bVI / iv|bVI / bVII]|i]">Hips Don't Lie</option>
+			<option value="2|95|vi  // vi|IV  // IV|vi  // vi|IV  // IV|vi  // vi|IV  // IV|ii[ // V|IV  // IV||I   // I   / - / - / V]|IV  // IV  / - / - / V]|I   // I   / - / - / V]|IV  // IV  / - / - / V]|I   // I   / - / - / V]|IV  // IV  / - / - / V]|vi] // vi] / - / - / V]|IV  // IV  / - / - / V]">Style</option>
+		</select>
+	</p>
 	</div>
 	<div style="float: left; margin-left: 5em; width: 350px;">
 	<table>
@@ -334,15 +346,24 @@ vi</textarea>
 	<script>
 
 function getProg(){
-	var p = document.getElementById('prog').value;
+	var p = document.getElementById('prog').value.replace(/^:.*$/gm, '');
 	if (p.replace(/^\s+|\s+$/g, '') === '')
 		return [];
-	p.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-	return p.split('\n');
+	p = p.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+	return p.split(/\n|\/\//);
 }
 
 function setProg(p){
 	document.getElementById('prog').value = p.join('\n');
+}
+
+function setPreset(txt){
+	txt = txt.replace(/\[/g, '<').replace(/\]/g, '>').split('|');
+	document.getElementById('keyof').selectedIndex = parseInt(txt.shift());
+	document.getElementById('bpm').value = txt.shift();
+	setProg(txt);
+	document.getElementById('prs').selectedIndex = 0;
+	updateScaleDegrees();
 }
 
 var volume = 50;
@@ -364,9 +385,7 @@ function addBPM(v){
 }
 
 function add(ch){
-	var p = getProg();
-	p.push(ch);
-	setProg(p);
+	document.getElementById('prog').value += '\n' + ch;
 }
 
 function updateScaleDegrees(){
@@ -604,6 +623,9 @@ function findModes(simps){
 	return m;
 }
 
+function setError(err){
+}
+
 function play(){
 	stop();
 	var p = getProg();
@@ -625,8 +647,7 @@ function play(){
 		else if (row.length == 3)
 			row = [row[0], row[1], row[2], ''];
 		else if (row.length > 4){
-			p[i] = 'BAD: ' + p[i];
-			setProg(p);
+			setError(p[i]);
 			continue;
 		}
 		var tbs = [];
@@ -634,8 +655,7 @@ function play(){
 			var tb = chordToBassTreble(row[j].replace(/\s/g, ''));
 			if (tb === false){
 				tbs = [];
-				p[i] = 'BAD: ' + p[i];
-				setProg(p);
+				setError(p[i]);
 				break;
 			}
 			tbs.push(tb);
