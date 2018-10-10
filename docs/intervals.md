@@ -11,7 +11,7 @@ Whole-step: Two half-steps.
 | 1          | minor 2nd   | m2    | m2,  m9 |                            |
 | 2          | Major 2nd   | M2    |  2,   9 |                            |
 | 3          | minor 3rd   | m3    | m3,  a9 |                            |
-| 4          | Major 3rd   | M2    |  3      |                            |
+| 4          | Major 3rd   | M3    |  3      |                            |
 | 5          | Perfect 4th | P4    |  4,  11 |                            |
 | 6          | Tritone     | TR    | d5, a11 |                            |
 | 7          | Perfect 5th | P5    |  5      |                            |
