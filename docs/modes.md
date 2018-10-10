@@ -4,8 +4,6 @@ Modes
 A mode is considered major if the 3rd scale degree is major (Lydian, Ionian, Mixolydian), and minor
 if the 3rd scale degree is flat (Dorian, Aeolian, Phrygian, Locrian).
 
-* [Notes
-
 | Brightness | Mode                                                                                | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
 |------------|-------------------------------------------------------------------------------------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | Brightest  | [Lydian](https://github.com/voidqk/music-theory/blob/master/docs/lydian.md)         | - | - | - | # | - | - | - |
@@ -83,6 +81,28 @@ Sevenths but up by P5
 | [Aeolian](https://github.com/voidqk/music-theory/blob/master/docs/minor.md) (Minor) | IV-7                   | I-7                  | V-7                  | I<sup>&oslash;</sup> | bVIM7                 | bIIIM7                 | bVII7                  |
 | [Phrygian](https://github.com/voidqk/music-theory/blob/master/docs/phrygian.md)     | IV-7                   | I-7                  | V<sup>&oslash;</sup> | bIIM7                | bVIM7                 | bIII7                  | bVII-7                 |
 | Locrian                                                                             | IV-7                   | I<sup>&oslash;</sup> | bVM7                 | bIIM7                | bVI7                  | bIII-7                 | bVII-7                 |
+
+Relative Modes
+--------------
+
+Relative modes are modes that share the same physical notes, but have a different tonal center.
+For example, C Major has the same notes as D Dorian, E Phrygian, etc, except that in D Dorian, the
+D is treated as the root note instead of C.
+
+| Ionian (Major) | Dorian | Phrygian | Lydian | Mixolydian | Aeolian (Minor) | Locrian |
+|----------------|--------|----------|--------|------------|-----------------|---------|
+| C              | D      | E        | F      | G          | A               | B       |
+| Db             | Eb     | F        | Gb     | Ab         | Bb              | C       |
+| D              | E      | Gb       | G      | A          | B               | Db      |
+| Eb             | F      | G        | Ab     | Bb         | C               | D       |
+| E              | Gb     | Ab       | A      | B          | Db              | Eb      |
+| F              | G      | A        | Bb     | C          | D               | E       |
+| Gb             | Ab     | Bb       | B      | Db         | Eb              | F       |
+| G              | A      | B        | C      | D          | E               | Gb      |
+| Ab             | Bb     | C        | Db     | Eb         | F               | G       |
+| A              | B      | Db       | D      | E          | Gb              | Ab      |
+| Bb             | C      | D        | Eb     | F          | G               | A       |
+| B              | Db     | Eb       | E      | Gb         | Ab              | Bb      |
 
 
 Why is Ionian "Major" and Aeolian "Minor"?
