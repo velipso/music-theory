@@ -25,11 +25,16 @@ Skills
   * 3/4 rhythm
   * 3/2 rhythm (hemiola)
   * Polyrhythm
+  * How to write fills for transitions
+  * How to use toms
+  * What makes a good drum solo
 * Lead
   * Making a good melody
   * Using bends in a melody
   * Using non-diatonic notes in a melody
   * Creating lead instruments that sound like the human voice (formants)
+  * What makes a good guitar solo
+  * How does question/response work in melodies
 * Harmony
   * Making a good chord progression
   	* Minor
@@ -40,6 +45,7 @@ Skills
   * Key changes
 * Bass
   * Creating a funky bass line
+  * What makes a good bass solo
 * Arrangement
   * Creating rising action
   * Building a good drop
