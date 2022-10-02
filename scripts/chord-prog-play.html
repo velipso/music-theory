@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <!--
-(c) Copyright 2017, Sean Connelly (@voidqk), http://syntheti.cc
-MIT License
-Project Home: https://github.com/voidqk/music-theory
+(c) Copyright 2017, Sean Connelly (@velipso), https://sean.cm
+BSD0 License
+Project Home: https://github.com/velipso/music-theory
 -->
 	<title>Chord Progression Player</title>
 	<style>
@@ -76,7 +76,7 @@ var noteHit = (function(){
 	var AudioContext = window.AudioContext || window.webkitAudioContext;
 	var ctx = new AudioContext();
 	function SimpleJSSynth(){
-		// copied and simplified from: https://github.com/voidqk/simple-js-synth
+		// copied and simplified from: https://github.com/velipso/simple-js-synth
 		var filter = ctx.createBiquadFilter();
 		filter.type = 'lowpass';
 		filter.frequency.setValueAtTime(22050, ctx.currentTime);
