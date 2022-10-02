@@ -17,6 +17,7 @@ input, select, option, textarea {
 	font-size: 18px;
 }
 button {
+	vertical-align: top;
 	font-size: 18px;
 }
 table button {
@@ -56,6 +57,11 @@ code {
 }
 ol {
 	margin-top: 0;
+}
+select#prs {
+	vertical-align: top;
+	padding: 4px 5px 1px;
+	font-size: 18px;
 }
 select#prs, select#prs option {
 	font-family: sans-serif;
@@ -218,7 +224,7 @@ var noteHit = function(){
 	<p>
 		Progression:
 	</p>
-	<textarea rows="20" cols="30" id="prog" spellcheck="false">I / vi
+	<textarea rows="13" cols="30" id="prog" spellcheck="false">I / vi
 I / vi
 IV / V
 I
@@ -352,6 +358,8 @@ vi</textarea>
 	<p id="out">&nbsp;</p>
 	<p>Detected Modes: <span id="modes">?</span></p>
 	</div>
+	<div style="clear: both;"></div>
+	<div id="drawing"></div>
 	<script>
 
 function getProg(){
@@ -432,6 +440,7 @@ var schedule = (function(){
 		if (my.list.length <= 0)
 			return;
 		my.next %= my.list.length;
+		drawNotesBeat(my.next);
 		var cmds = my.list[my.next++];
 		for (var i = 0; i < cmds.length; i++){
 			(function(c){
@@ -488,7 +497,7 @@ function notesToSchedule(notes){
 function chordsToNotes(keyof, chords){
 	function hsc(str){ return ('' + str).replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 	var TREB_VEL = function(){ return Math.random() * 0.05 + 0.4; };
-	var BASS_VEL  = function(){ return Math.random() * 0.05 + 0.4; };
+	var BASS_VEL = function(){ return Math.random() * 0.05 + 0.4; };
 	var notes = [];
 	var lastchord = '';
 	for (var i = 0; i < chords.length; i++){
@@ -517,7 +526,7 @@ function chordsToNotes(keyof, chords){
 		if (!repeat){
 			// bass
 			nt.push([36 + ch.bass + keyof, BASS_VEL(), dur]);
-			nt.push([43 + ch.bass + keyof, BASS_VEL(), dur]);
+			//nt.push([43 + ch.bass + keyof, BASS_VEL(), dur]);
 			nt.push([48 + ch.bass + keyof, BASS_VEL(), dur]);
 		}
 		// treble
@@ -561,18 +570,18 @@ function chordToBassTreble(chord){
 	//    |_____|_____|_____|_____|_____|_____|_____|_____|
 	switch (body){
 		case 'I'  : bass =  0; treb = [ 0, 4, 7]; break;
-		case 'II' : bass =  2; treb = [ 2, 6, 9]; break;
-		case 'III': bass =  4; treb = [-1, 4, 8]; break;
-		case 'IV' : bass =  5; treb = [ 0, 5, 9]; break;
-		case 'V'  : bass = -5; treb = [-1, 2, 7]; break;
-		case 'VI' : bass = -3; treb = [ 1, 4, 9]; break;
-		case 'VII': bass = -1; treb = [-1, 3, 6]; break;
 		case 'i'  : bass =  0; treb = [ 0, 3, 7]; break;
+		case 'II' : bass =  2; treb = [ 2, 6, 9]; break;
 		case 'ii' : bass =  2; treb = [ 2, 5, 9]; break;
+		case 'III': bass =  4; treb = [-1, 4, 8]; break;
 		case 'iii': bass =  4; treb = [-1, 4, 7]; break;
+		case 'IV' : bass =  5; treb = [ 0, 5, 9]; break;
 		case 'iv' : bass =  5; treb = [ 0, 5, 8]; break;
+		case 'V'  : bass = -5; treb = [-1, 2, 7]; break;
 		case 'v'  : bass = -5; treb = [-2, 2, 7]; break;
+		case 'VI' : bass = -3; treb = [ 1, 4, 9]; break;
 		case 'vi' : bass = -3; treb = [ 0, 4, 9]; break;
+		case 'VII': bass = -1; treb = [-1, 3, 6]; break;
 		case 'vii': bass = -1; treb = [-1, 2, 6]; break;
 		case ''   :
 		case '-'  :
@@ -709,10 +718,127 @@ function play(){
 		document.getElementById('modes').innerHTML = modes[0];
 	else
 		document.getElementById('modes').innerHTML = '<ol><li>' + modes.join('</li><li>') + '</li></ol>';
-	schedule.list = notesToSchedule(chordsToNotes(keyof, chords));
+	var c2n = chordsToNotes(keyof, chords);
+	drawNotes(c2n, keyof);
+	schedule.list = notesToSchedule(c2n);
 	var bpm = parseFloat(document.getElementById('bpm').value);
 	if (!isNaN(bpm) && bpm >= 30 && bpm <= 300)
 		schedule.bpm = bpm;
+}
+
+var drawNotesBeat = function(){};
+function drawNotes(notes, keyof){
+	var cnvOut = document.getElementById('drawing');
+	cnvOut.innerHTML = '';
+	var noteRange = [999, -1];
+	for (var i = 0; i < notes.length; i++){
+		for (var c = 0; c < notes[i].length; c++){
+			var cmd = notes[i][c];
+			if (typeof cmd === 'string')
+				continue;
+			noteRange[0] = Math.min(noteRange[0], cmd[0]);
+			noteRange[1] = Math.max(noteRange[1], cmd[0]);
+		}
+	}
+	if (noteRange[0] >= 999 || noteRange[1] < 0)
+		return;
+	var dpr = Math.max(1, window.devicePixelRatio || 1);
+	var cnv = document.createElement('canvas');
+	var cnv2 = document.createElement('canvas');
+	var cellWidth = 30;
+	var cellHeight = 12;
+	var inserts = Math.ceil((notes.length + 1) / 16);
+	var gridWidth = notes.length + inserts;
+	var gridHeight = noteRange[1] - noteRange[0] + 1;
+	var drawWidth = gridWidth * cellWidth;
+	var drawHeight = gridHeight * cellHeight;
+	cnv2.style.width = drawWidth + 'px';
+	cnv2.style.height = drawHeight + 'px';
+	cnv.width = dpr * drawWidth;
+	cnv.height = dpr * drawHeight;
+	cnv2.width = dpr * drawWidth;
+	cnv2.height = dpr * drawHeight;
+	var ctx = cnv.getContext('2d');
+	var ctx2 = cnv2.getContext('2d');
+	ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+	ctx.font = '11px monospace';
+	ctx.textBaseline = 'middle';
+	ctx.textAlign = 'center';
+	for (var x = 0; x < inserts; x++){
+		var offset = x * cellWidth * 17;
+		for (var y = 0; y < gridHeight; y++){
+			var n = (noteRange[1] - y) % 12;
+			var blackKey = n === 1 || n === 3 || n === 6 || n === 8 || n === 10;
+			ctx.fillStyle = blackKey ? '#000' : '#fff';
+			ctx.fillRect(offset, y * cellHeight, cellWidth, cellHeight);
+			ctx.fillStyle = blackKey ? '#fff' : '#000';
+			ctx.fillText(
+				('C DbD EbE F GbG AbA BbB ').substr(n * 2, 2),
+				offset + cellWidth / 2,
+				(y + 0.55) * cellHeight
+			);
+		}
+	}
+	ctx.strokeStyle = '#222';
+	for (var y = 0; y < gridHeight; y++){
+		for (var x = 0; x < gridWidth; x++){
+			ctx.beginPath();
+			ctx.rect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+			ctx.stroke();
+		}
+	}
+	for (var x = 0; x < notes.length; x++){
+		for (var c = 0; c < notes[x].length; c++){
+			var cmd = notes[x][c];
+			if (typeof cmd === 'string')
+				continue;
+			var offset = Math.ceil((x + 1) / 16);
+			var y = noteRange[1] - cmd[0];
+			drawRect(
+				ctx,
+				((cmd[0] + 12 - keyof) % 12) * 360 / 12,
+				(x + offset) * cellWidth + 0.5,
+				y * cellHeight + 0.5,
+				cmd[2] * cellWidth - 1,
+				cellHeight - 1
+			);
+		}
+	}
+
+	drawNotesBeat = function(beat){
+		ctx2.setTransform(1, 0, 0, 1, 0, 0);
+		ctx2.fillStyle = '#444';
+		ctx2.fillRect(0, 0, cnv.width, cnv.height);
+		if (beat >= 0){
+			ctx2.setTransform(dpr, 0, 0, dpr, 0, 0);
+			ctx2.fillStyle = '#666';
+			ctx2.fillRect((beat + Math.ceil((beat + 1) / 16)) * cellWidth, 0, cellWidth, drawHeight);
+		}
+		ctx2.setTransform(1, 0, 0, 1, 0, 0);
+		ctx2.drawImage(cnv, 0, 0);
+	};
+
+	drawNotesBeat(-1);
+	cnvOut.appendChild(cnv2);
+}
+
+function drawRect(ctx, hue, x, y, dx, dy){
+	ctx.fillStyle = 'hsl(' + hue  + ', 100%, 50%)';
+	ctx.fillRect(x, y, dx, dy);
+	dx--;
+	dy--;
+	ctx.beginPath();
+	ctx.moveTo(x + 0.5, y + 0.5 + dy);
+	ctx.lineTo(x + 0.5, y + 0.5);
+	ctx.lineTo(x + 0.5 + dx, y + 0.5);
+	ctx.strokeStyle = 'hsl(' + hue  + ', 100%, 75%)';
+	ctx.stroke();
+	ctx.beginPath();
+	ctx.moveTo(x + 0.5, y + 0.5 + dy);
+	ctx.lineTo(x + 0.5 + dx, y + 0.5 + dy);
+	ctx.lineTo(x + 0.5 + dx, y + 0.5);
+	ctx.strokeStyle = 'hsl(' + hue  + ', 100%, 25%)';
+	ctx.stroke();
 }
 
 function stop(){
