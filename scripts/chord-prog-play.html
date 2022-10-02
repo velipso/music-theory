@@ -842,6 +842,7 @@ function drawRect(ctx, hue, x, y, dx, dy){
 }
 
 function stop(){
+	drawNotesBeat(-1);
 	schedule.list = [];
 	schedule.next = 0;
 	setTimeout(function(){
