@@ -62,7 +62,7 @@ select#prs, select#prs option {
 }
 	</style>
 	<script>
-var noteHit = (function(){
+var noteHitFunc = function(){
 	var opts = {
 		osc1type: "square"  , osc1vol: 0.3, osc1tune:   0,
 		osc2type: "sine"    , osc2vol: 0.2, osc2tune:  12,
@@ -176,7 +176,13 @@ var noteHit = (function(){
 			}
 		}
 	};
-})();
+};
+var noteHitFuncCache = false;
+var noteHit = function(){
+	if (!noteHitFuncCache)
+		noteHitFuncCache = noteHitFunc();
+	return noteHitFuncCache.apply(this, arguments);
+};
 	</script>
 </head>
 <body>
