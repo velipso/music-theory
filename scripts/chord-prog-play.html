@@ -29,6 +29,14 @@ button.fs {
 	width: 30px;
 	margin: 0;
 }
+button.cs {
+	width: 55px;
+	margin: 0 2px;
+}
+button.ex {
+	width: 96px;
+	margin: 0 2px 10px;
+}
 p {
 	line-height: 1.3em;
 	text-align: justify;
@@ -65,6 +73,10 @@ select#prs {
 }
 select#prs, select#prs option {
 	font-family: sans-serif;
+}
+.cb {
+	font-weight: bold;
+	text-align: right;
 }
 	</style>
 	<script>
@@ -211,20 +223,20 @@ var noteHit = function(){
 	</p>
 	<p>
 		Tempo:
-		<button onclick="javascript: addBPM(-20);">&larr;</button>
+		<button onclick="addBPM(-20);">&larr;</button>
 		<input id="bpm" size="4" type="text" value="70" />
-		<button onclick="javascript: addBPM(20);">&rarr;</button>
+		<button onclick="addBPM(20);">&rarr;</button>
 	</p>
 	<p>
 		Volume:
-		<button onclick="javascript: addVolume(-10);">&larr;</button>
-		<span id="vol">?</span>
-		<button onclick="javascript: addVolume(10);">&rarr;</button>
+		<button onclick="addVolume(-10);">&larr;</button>
+		<input id="vol" size="4" type="text" value="50" />
+		<button onclick="addVolume(10);">&rarr;</button>
 	</p>
 	<p>
 		Progression:
 	</p>
-	<textarea rows="13" cols="30" id="prog" spellcheck="false">I / vi
+	<textarea rows="12" cols="25" id="prog" spellcheck="false">I / vi
 I / vi
 IV / V
 I
@@ -233,19 +245,19 @@ vi&gt; / IV&gt;
 V&gt;&gt; / III&gt;
 vi</textarea>
 	<p>
-		<button onclick="javascript: setProg([]);">Clear</button>
-		<select id="prs" onchange="javascript: this.selectedIndex && setPreset(this.options[this.selectedIndex].value);">
+		<button onclick="setProg([]);">Clear</button>
+		<select id="prs" onchange="this.selectedIndex && setPreset(this.options[this.selectedIndex].value);">
 			<option>&ndash; Presets &ndash;</option>
 			<option value="0|70|I / vi|I / vi|IV / V|I|I / - / IV / V]|vi] / IV]|V]] / III]|vi">Hallelujah</option>
 			<option value="10|100|i / v]|bVI / iv|bVI / bVII]|i]">Hips Don't Lie</option>
 			<option value="2|95|vi  // vi|IV  // IV|vi  // vi|IV  // IV|vi  // vi|IV  // IV|ii[ // V|IV  // IV||I   // I   / - / - / V]|IV  // IV  / - / - / V]|I   // I   / - / - / V]|IV  // IV  / - / - / V]|I   // I   / - / - / V]|IV  // IV  / - / - / V]|vi] // vi] / - / - / V]|IV  // IV  / - / - / V]">Style</option>
 			<option value="2|120|I|V   ]|vi  ]|iii ]|IV|I|IV|V   ]">Canon in D</option>
-			<option value="7|105|I|V  ]|vi|I|IV|iv|I|I">Wake Me Up When Sept. Ends</option>
+			<option value="7|105|I|V  ]|vi|I|IV|iv|I|I">Wake Me Up When...</option>
 			<option value="0|115|I|VI|ii|bVII / V">I Get Around</option>
 		</select>
 	</p>
 	</div>
-	<div style="float: left; margin-left: 5em; width: 350px;">
+	<div style="float: left; margin-left: 1em; width: 310px;">
 	<table>
 		<thead>
 			<tr>
@@ -258,105 +270,242 @@ vi</textarea>
 			<tr>
 				<td id="scale1">1</td>
 				<td>
-					<button class="fs" onclick="javascript: add('bI');">b</button
-					><button onclick="javascript: add('I');">I</button
-					><button class="fs" onclick="javascript: add('#I');">#</button>
+					<button class="fs" onclick="add('bI');">b</button
+					><button onclick="add('I');">I</button
+					><button class="fs" onclick="add('#I');">#</button>
 				</td>
 				<td>
-					<button class="fs" onclick="javascript: add('bi');">b</button
-					><button onclick="javascript: add('i');">i</button
-					><button class="fs" onclick="javascript: add('#i');">#</button></td>
+					<button class="fs" onclick="add('bi');">b</button
+					><button onclick="add('i');">i</button
+					><button class="fs" onclick="add('#i');">#</button></td>
 			</tr>
 			<tr>
 				<td id="scale2">2</td>
 				<td>
-					<button class="fs" onclick="javascript: add('bII');">b</button
-					><button onclick="javascript: add('II');">II</button
-					><button class="fs" onclick="javascript: add('#II');">#</button>
+					<button class="fs" onclick="add('bII');">b</button
+					><button onclick="add('II');">II</button
+					><button class="fs" onclick="add('#II');">#</button>
 				</td>
 				<td>
-					<button class="fs" onclick="javascript: add('bii');">b</button
-					><button onclick="javascript: add('ii');">ii</button
-					><button class="fs" onclick="javascript: add('#ii');">#</button>
+					<button class="fs" onclick="add('bii');">b</button
+					><button onclick="add('ii');">ii</button
+					><button class="fs" onclick="add('#ii');">#</button>
 				</td>
 			</tr>
 			<tr>
 				<td id="scale3">3</td>
 				<td>
-					<button class="fs" onclick="javascript: add('bIII');">b</button
-					><button onclick="javascript: add('III');">III</button
-					><button class="fs" onclick="javascript: add('#III');">#</button>
+					<button class="fs" onclick="add('bIII');">b</button
+					><button onclick="add('III');">III</button
+					><button class="fs" onclick="add('#III');">#</button>
 				</td>
 				<td>
-					<button class="fs" onclick="javascript: add('biii');">b</button
-					><button onclick="javascript: add('iii');">iii</button
-					><button class="fs" onclick="javascript: add('#iii');">#</button>
+					<button class="fs" onclick="add('biii');">b</button
+					><button onclick="add('iii');">iii</button
+					><button class="fs" onclick="add('#iii');">#</button>
 				</td>
 			</tr>
 			<tr>
 				<td id="scale4">4</td>
 				<td>
-					<button class="fs" onclick="javascript: add('bIV');">b</button
-					><button onclick="javascript: add('IV');">IV</button
-					><button class="fs" onclick="javascript: add('#IV');">#</button>
+					<button class="fs" onclick="add('bIV');">b</button
+					><button onclick="add('IV');">IV</button
+					><button class="fs" onclick="add('#IV');">#</button>
 				</td>
 				<td>
-					<button class="fs" onclick="javascript: add('biv');">b</button
-					><button onclick="javascript: add('iv');">iv</button
-					><button class="fs" onclick="javascript: add('#iv');">#</button>
+					<button class="fs" onclick="add('biv');">b</button
+					><button onclick="add('iv');">iv</button
+					><button class="fs" onclick="add('#iv');">#</button>
 				</td>
 			</tr>
 			<tr>
 				<td id="scale5">5</td>
 				<td>
-					<button class="fs" onclick="javascript: add('bV');">b</button
-					><button onclick="javascript: add('V');">V</button
-					><button class="fs" onclick="javascript: add('#V');">#</button>
+					<button class="fs" onclick="add('bV');">b</button
+					><button onclick="add('V');">V</button
+					><button class="fs" onclick="add('#V');">#</button>
 				</td>
 				<td>
-					<button class="fs" onclick="javascript: add('bv');">b</button
-					><button onclick="javascript: add('v');">v</button
-					><button class="fs" onclick="javascript: add('#v');">#</button>
+					<button class="fs" onclick="add('bv');">b</button
+					><button onclick="add('v');">v</button
+					><button class="fs" onclick="add('#v');">#</button>
 				</td>
 			</tr>
 			<tr>
 				<td id="scale6">6</td>
 				<td>
-					<button class="fs" onclick="javascript: add('bVI');">b</button
-					><button onclick="javascript: add('VI');">VI</button
-					><button class="fs" onclick="javascript: add('#VI');">#</button>
+					<button class="fs" onclick="add('bVI');">b</button
+					><button onclick="add('VI');">VI</button
+					><button class="fs" onclick="add('#VI');">#</button>
 				</td>
 				<td>
-					<button class="fs" onclick="javascript: add('bvi');">b</button
-					><button onclick="javascript: add('vi');">vi</button
-					><button class="fs" onclick="javascript: add('#vi');">#</button>
+					<button class="fs" onclick="add('bvi');">b</button
+					><button onclick="add('vi');">vi</button
+					><button class="fs" onclick="add('#vi');">#</button>
 				</td>
 			</tr>
 			<tr>
 				<td id="scale7">7</td>
 				<td>
-					<button class="fs" onclick="javascript: add('bVII');">b</button
-					><button onclick="javascript: add('VII');">VII</button
-					><button class="fs" onclick="javascript: add('#VII');">#</button>
+					<button class="fs" onclick="add('bVII');">b</button
+					><button onclick="add('VII');">VII</button
+					><button class="fs" onclick="add('#VII');">#</button>
 				</td>
 				<td>
-					<button class="fs" onclick="javascript: add('bvii');">b</button
-					><button onclick="javascript: add('vii');">vii</button
-					><button class="fs" onclick="javascript: add('#vii');">#</button>
+					<button class="fs" onclick="add('bvii');">b</button
+					><button onclick="add('vii');">vii</button
+					><button class="fs" onclick="add('#vii');">#</button>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 	<p>
-		Chords can end with <code>&lt;</code> or <code>&gt;</code> multiple times to move down or up
-		the keys using inversions.
+		Chords can end with <code>&lt;</code> or <code>&gt;</code> for inversions.
 	</p>
 	<p style="text-align: center;">
-		<button class="doit" onclick="javascript: play();">PLAY</button>
-		<button class="doit" onclick="javascript: stop();">STOP</button>
+		<button class="doit" onclick="play();">PLAY</button>
+		<button class="doit" onclick="stop();">STOP</button>
 	</p>
 	<p id="out">&nbsp;</p>
 	<p>Detected Modes: <span id="modes">?</span></p>
+	</div>
+	<div style="float: left; margin-left: 1em; width: 530px;">
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Modes</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="cb">Major</td>
+				<td>
+					<button class="cs" onclick="add('I');">I</button
+					><button class="cs" onclick="add('ii');">ii</button
+					><button class="cs" onclick="add('iii');">iii</button
+					><button class="cs" onclick="add('IV');">IV</button
+					><button class="cs" onclick="add('V');">V</button
+					><button class="cs" onclick="add('vi');">vi</button
+					><button class="cs" onclick="add('viio');">viio</button>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<button class="ex" onclick="add('I\nV\nvi\nIV');">Maj 1</button>
+					<button class="ex" onclick="add('I\nvi\nIV\nV');">Maj 2</button>
+					<button class="ex" onclick="add('I\nIV\nI\nV');">Maj 3</button>
+					<button class="ex" onclick="add('I\nI\nii\nV');">Maj 4</button>
+				</td>
+			</tr>
+			<tr>
+				<td class="cb">Dorian</td>
+				<td>
+					<button class="cs" onclick="add('i');">i</button
+					><button class="cs" onclick="add('ii');">ii</button
+					><button class="cs" onclick="add('bIII');">bIII</button
+					><button class="cs" onclick="add('IV');">IV</button
+					><button class="cs" onclick="add('v');">v</button
+					><button class="cs" onclick="add('vio');">vio</button
+					><button class="cs" onclick="add('bVII');">bVII</button>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<button class="ex" onclick="add('i\ni\nIV\nIV');">Dor 1</button>
+					<button class="ex" onclick="add('i\nbIII\nIV\ni');">Dor 2</button>
+					<button class="ex" onclick="add('i\nbVII\nIV\nIV');">Dor 3</button>
+					<button class="ex" onclick="add('i\ni\nii\nIV');">Dor 4</button>
+				</td>
+			</tr>
+			<tr>
+				<td class="cb">Phrygian</td>
+				<td>
+					<button class="cs" onclick="add('i');">i</button
+					><button class="cs" onclick="add('bII');">bII</button
+					><button class="cs" onclick="add('bIII');">bIII</button
+					><button class="cs" onclick="add('iv');">iv</button
+					><button class="cs" onclick="add('vo');">vo</button
+					><button class="cs" onclick="add('bVI');">bVI</button
+					><button class="cs" onclick="add('bvii');">bvii</button>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<button class="ex" onclick="add('i\ni\nbII\nbvii');">Phr 1</button>
+					<button class="ex" onclick="add('i\ni\bbII\nbII');">Phr 2</button>
+					<button class="ex" onclick="add('i\nbII\nbIII\nbII');">Phr 3</button>
+					<button class="ex" onclick="add('i\ni\ni\nbII');">Phr 4</button>
+				</td>
+			</tr>
+			<tr>
+				<td class="cb">Lydian</td>
+				<td>
+					<button class="cs" onclick="add('I');">I</button
+					><button class="cs" onclick="add('II');">II</button
+					><button class="cs" onclick="add('iii');">iii</button
+					><button class="cs" onclick="add('#ivo');">#ivo</button
+					><button class="cs" onclick="add('V');">V</button
+					><button class="cs" onclick="add('vi');">vi</button
+					><button class="cs" onclick="add('vii');">vii</button>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<button class="ex" onclick="add('I\nI\nII\nII');">Lyd 1</button>
+					<button class="ex" onclick="add('I\nI\nI\nII');">Lyd 2</button>
+					<button class="ex" onclick="add('I\nII\nvii\nI');">Lyd 3</button>
+					<button class="ex" onclick="add('I\nII\nvi\nI');">Lyd 4</button>
+				</td>
+			</tr>
+			<tr>
+				<td class="cb">Mixolydian</td>
+				<td>
+					<button class="cs" onclick="add('I');">I</button
+					><button class="cs" onclick="add('ii');">ii</button
+					><button class="cs" onclick="add('iiio');">iiio</button
+					><button class="cs" onclick="add('IV');">IV</button
+					><button class="cs" onclick="add('v');">v</button
+					><button class="cs" onclick="add('vi');">vi</button
+					><button class="cs" onclick="add('bVII');">bVII</button>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<button class="ex" onclick="add('I\nbVII\nIV\nIV');">Mix 1</button>
+					<button class="ex" onclick="add('I\nIV\nbVII\nI');">Mix 2</button>
+					<button class="ex" onclick="add('I\nv\nIV\nbVII');">Mix 3</button>
+					<button class="ex" onclick="add('I\nbVII\nIV\nI');">Mix 4</button>
+				</td>
+			</tr>
+			<tr>
+				<td class="cb">Minor</td>
+				<td>
+					<button class="cs" onclick="add('i');">i</button
+					><button class="cs" onclick="add('iio');">iio</button
+					><button class="cs" onclick="add('bIII');">bIII</button
+					><button class="cs" onclick="add('iv');">iv</button
+					><button class="cs" onclick="add('v');">v</button
+					><button class="cs" onclick="add('bVI');">bVI</button
+					><button class="cs" onclick="add('bVII');">bVII</button>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<button class="ex" onclick="add('i\nbVII\nbVI\nbVII');">Min 1</button>
+					<button class="ex" onclick="add('i\nbVI\nbIII\hbVII');">Min 2</button>
+					<button class="ex" onclick="add('i\ni\nbVI\nbVII');">Min 3</button>
+					<button class="ex" onclick="add('i\nbVII\nv\nbVI');">Min 4</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 	</div>
 	<div style="clear: both;"></div>
 	<div id="drawing"></div>
@@ -383,13 +532,15 @@ function setPreset(txt){
 	updateScaleDegrees();
 }
 
-var volume = 50;
-
 function addVolume(v){
-	volume = Math.min(Math.max(volume + v, 10), 100);
-	document.getElementById('vol').innerHTML = volume === 100 ? 99 : volume;
+	var e = document.getElementById('vol');
+	var n = parseFloat(e.value);
+	if (!isNaN(n))
+		n = Math.max(Math.min(n + v, 100), 0);
+	else
+		n = 50;
+	e.value = '' + n;
 }
-addVolume(0);
 
 function addBPM(v){
 	var e = document.getElementById('bpm');
@@ -442,6 +593,7 @@ var schedule = (function(){
 		my.next %= my.list.length;
 		drawNotesBeat(my.next);
 		var cmds = my.list[my.next++];
+		var volume = parseFloat(document.getElementById('vol').value);
 		for (var i = 0; i < cmds.length; i++){
 			(function(c){
 				if (typeof c === 'string'){
@@ -569,22 +721,29 @@ function chordToBassTreble(chord){
 	//    |  -1 |  0  |  2  |  4  |  5  |  7  |  9  | 11  |
 	//    |_____|_____|_____|_____|_____|_____|_____|_____|
 	switch (body){
-		case 'I'  : bass =  0; treb = [ 0, 4, 7]; break;
-		case 'i'  : bass =  0; treb = [ 0, 3, 7]; break;
-		case 'II' : bass =  2; treb = [ 2, 6, 9]; break;
-		case 'ii' : bass =  2; treb = [ 2, 5, 9]; break;
-		case 'III': bass =  4; treb = [-1, 4, 8]; break;
-		case 'iii': bass =  4; treb = [-1, 4, 7]; break;
-		case 'IV' : bass =  5; treb = [ 0, 5, 9]; break;
-		case 'iv' : bass =  5; treb = [ 0, 5, 8]; break;
-		case 'V'  : bass = -5; treb = [-1, 2, 7]; break;
-		case 'v'  : bass = -5; treb = [-2, 2, 7]; break;
-		case 'VI' : bass = -3; treb = [ 1, 4, 9]; break;
-		case 'vi' : bass = -3; treb = [ 0, 4, 9]; break;
-		case 'VII': bass = -1; treb = [-1, 3, 6]; break;
-		case 'vii': bass = -1; treb = [-1, 2, 6]; break;
-		case ''   :
-		case '-'  :
+		case 'I'   : bass =  0; treb = [ 0, 4, 7]; break;
+		case 'i'   : bass =  0; treb = [ 0, 3, 7]; break;
+		case 'io'  : bass =  0; treb = [ 0, 3, 6]; break;
+		case 'II'  : bass =  2; treb = [ 2, 6, 9]; break;
+		case 'ii'  : bass =  2; treb = [ 2, 5, 9]; break;
+		case 'iio' : bass =  2; treb = [ 2, 5, 8]; break;
+		case 'III' : bass =  4; treb = [-1, 4, 8]; break;
+		case 'iii' : bass =  4; treb = [-1, 4, 7]; break;
+		case 'iiio': bass =  4; treb = [-2, 4, 7]; break;
+		case 'IV'  : bass =  5; treb = [ 0, 5, 9]; break;
+		case 'iv'  : bass =  5; treb = [ 0, 5, 8]; break;
+		case 'ivo' : bass =  5; treb = [-1, 5, 8]; break;
+		case 'V'   : bass = -5; treb = [-1, 2, 7]; break;
+		case 'v'   : bass = -5; treb = [-2, 2, 7]; break;
+		case 'vo'  : bass = -5; treb = [-2, 1, 7]; break;
+		case 'VI'  : bass = -3; treb = [ 1, 4, 9]; break;
+		case 'vi'  : bass = -3; treb = [ 0, 4, 9]; break;
+		case 'vio' : bass = -3; treb = [ 0, 3, 9]; break;
+		case 'VII' : bass = -1; treb = [-1, 3, 6]; break;
+		case 'vii' : bass = -1; treb = [-1, 2, 6]; break;
+		case 'viio': bass = -1; treb = [-1, 2, 5]; break;
+		case ''    :
+		case '-'   :
 			if (body !== chord)
 				return false;
 			chord = '';
@@ -623,10 +782,10 @@ function chordToBassTreble(chord){
 function findModes(simps){
 	var modes = {
 		'Lydian': ['I', 'II', 'iii', '#ivo', 'V', 'vi', 'vii'],
-		'Ionian [Major]': ['I', 'ii', 'iii', 'IV', 'V', 'vi', 'viio'],
+		'Major': ['I', 'ii', 'iii', 'IV', 'V', 'vi', 'viio'],
 		'Mixolydian': ['I', 'ii', 'iiio', 'IV', 'v', 'vi', 'bVII'],
 		'Dorian': ['i', 'ii', 'bIII', 'IV', 'v', 'vio', 'bVII'],
-		'Aeolian [Minor]': ['i', 'iio', 'bIII', 'iv', 'v', 'bVI', 'bVII'],
+		'Minor': ['i', 'iio', 'bIII', 'iv', 'v', 'bVI', 'bVII'],
 		'Phrygian': ['i', 'bII', 'bIII', 'iv', 'vo', 'bVI', 'bvii'],
 		'Locrian': ['io', 'bII', 'biii', 'iv', 'bV', 'bVI', 'bvii']
 	};
